@@ -1,26 +1,19 @@
-import axios from "../axios";
-import type { DocumentItem } from "../types";
+import { NextRequest, NextResponse } from "next/server";
+import { documentMock } from "../mocks/document";
+import { DocumentItem } from "../types";
 
-export const getDocuments = async (): Promise<DocumentItem[]> => {
-  const res = await axios.get("/documents");
-  return res.data;
-};
+export async function getDocumentsMock(pageSize: number, page: number): Promise<DocumentItem[]> {
+  // simulate async API call
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      const startIndex: number = pageSize * (page - 1)
+      const endIndex: number = pageSize * (page)
+      resolve(documentMock.slice(startIndex,endIndex))
+    }, 500) // optional delay
+  });
+}
 
-export const getDocumentById = async (id: string): Promise<DocumentItem> => {
-  const res = await axios.get(`/documents/${id}`);
-  return res.data;
-};
 
-export const createDocument = async (payload: Partial<DocumentItem>): Promise<DocumentItem> => {
-  const res = await axios.post("/documents", payload);
-  return res.data;
-};
-
-export const updateDocument = async (id: string, payload: Partial<DocumentItem>): Promise<DocumentItem> => {
-  const res = await axios.put(`/documents/${id}`, payload);
-  return res.data;
-};
-
-export const deleteDocument = async (id: string): Promise<void> => {
-  await axios.delete(`/documents/${id}`);
-};
+// export async function getDocuments(req: NextRequest): Promise<DocumentItem[]> {
+//   return NextResponse.json(documentMock)
+// }
