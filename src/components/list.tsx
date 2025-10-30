@@ -10,8 +10,8 @@ export default function List(
 ) {
     return (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead className="text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <table className="w-full text-sm text-left rtl:text-right text-gray-500">
+                <thead className="text-xs text-white bg-[#011b56]">
                     <tr>
                         <th scope="col" className="p-4">
                             <div className="flex items-center">
@@ -61,10 +61,10 @@ export default function List(
                                 </td>
                                 <td className="px-6 py-4">
                                     <Image
-                                        src="/dot-menu-icon.svg"
+                                        src={doc.isFile ? "/dot-menu-file-icon.svg" : "/dot-menu-folder-icon.svg" }
                                         alt="Menu Icon"
-                                        width={20}
-                                        height={20}
+                                        width={12}
+                                        height={12}
                                         priority
                                     />
                                 </td>

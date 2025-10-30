@@ -6,3 +6,8 @@ export interface DocumentItem {
   sizeKB?: number;
   isFile: boolean;
 }
+
+export interface GetDocumentResponse {
+  data: DocumentItem[];
+  count: number;
+}
