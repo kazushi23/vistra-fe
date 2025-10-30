@@ -55,8 +55,15 @@ export default function List(
                                         <label htmlFor="checkbox-table-search-1" className="sr-only">checkbox</label>
                                     </div>
                                 </td>
-                                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                    {doc.name ?? "-"}
+                                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap flex space-x-3">
+                                    <Image
+                                        src={doc.isFile ? "/file-icon.svg" : "/folder-icon.svg" }
+                                        alt="Menu Icon"
+                                        width={20}
+                                        height={20}
+                                        priority
+                                    />
+                                    <p>{doc.name ?? "-"}</p>
                                 </th>
                                 <td className="px-6 py-4">
                                     {doc.createdBy ?? "-"}
