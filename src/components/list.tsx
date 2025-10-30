@@ -4,7 +4,15 @@ import Image from "next/image";
 interface ListProps {
   documentData: DocumentItem[];
 }
-
+function getDatetimeString(unixmilli: number): string {
+    return unixmilli ? new Date(unixmilli).toLocaleString("en-SG", {
+        timeZone: "Asia/Singapore",
+        year: "numeric",
+        month: "short",
+        day: "2-digit",
+      })
+    : "-"
+}
 export default function List(
     {documentData}: ListProps
 ) {
@@ -54,7 +62,7 @@ export default function List(
                                     {doc.createdBy ?? "-"}
                                 </td>
                                 <td className="px-6 py-4">
-                                    {doc.updatedAt ?? "-"}
+                                    {getDatetimeString(doc.updatedAt)}
                                 </td>
                                 <td className="px-6 py-4">
                                     {doc.sizeKB ?? "-"}
