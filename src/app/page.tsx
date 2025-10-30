@@ -9,13 +9,12 @@ import { pageSizes } from "@/lib/static/pagesizes";
 
 export default function Home() {
   const [documents, setDocuments] = useState<DocumentItem[]>([])
-  const [documentCopunt, setDocumentsCount] = useState<number>(0)
-  const [loading, setLoading] = useState<boolean>(false)
+  const [documentCount, setDocumentsCount] = useState<number>(0)
+  const [loading, setLoading] = useState<boolean>(true)
   const [pageSize, setPageSize] = useState<number>(pageSizes[0])
   const [page, setPage] = useState<number>(1)
 
   useEffect(() => {
-    setLoading(true)
     async function fetchDocuments() {
       try {
         const res: GetDocumentResponse = await getDocumentsMock(pageSize, page)
@@ -28,13 +27,13 @@ export default function Home() {
       }
     }
     fetchDocuments()
-  }, [])
+  }, [page, pageSize])
   return (
     <div className="min-h-screen p-8">
       <main>
         <Heading/>
-        <List documentData={documents}/>
-      </main>
+        {!loading && <List documentData={documents} count={documentCount} pageSize={pageSize} setPageSize={setPageSize} page={page} setPage={setPage}/>}
+        </main>
     </div>
   );
 }
