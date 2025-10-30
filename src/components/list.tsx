@@ -36,19 +36,19 @@ export default function List(
                                     <label htmlFor="checkbox-all-search" className="sr-only">checkbox</label>
                                 </div>
                             </th>
-                            <th scope="col" className="px-6 py-3">
+                            <th scope="col" className="px-6 py-3 font-normal">
                                 Name
                             </th>
-                            <th scope="col" className="px-6 py-3">
+                            <th scope="col" className="px-6 py-3 font-normal">
                                 Created by
                             </th>
-                            <th scope="col" className="px-6 py-3">
+                            <th scope="col" className="px-6 py-3 font-normal">
                                 Date
                             </th>
-                            <th scope="col" className="px-6 py-3">
+                            <th scope="col" className="px-6 py-3 font-normal">
                                 File size
                             </th>
-                            <th scope="col" className="px-6 py-3">
+                            <th scope="col" className="px-6 py-3 font-normal">
                                 
                             </th>
                         </tr>
@@ -81,9 +81,9 @@ export default function List(
                                         {getDatetimeString(doc.updatedAt)}
                                     </td>
                                     <td className="px-6 py-4">
-                                        {doc.sizeKB ?? "-"}
+                                        {doc.sizeKB ? `${doc.sizeKB} KB` : "-"}
                                     </td>
-                                    <td className="px-6 py-4">
+                                    <td className="px-6 py-4 cursor-pointer">
                                         <Image
                                             src={doc.isFile ? "/dot-menu-file-icon.svg" : "/dot-menu-folder-icon.svg" }
                                             alt="Menu Icon"

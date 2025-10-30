@@ -13,15 +13,31 @@ interface PageProps {
 
 export default function PageSelection({page, count, pageSize, setPage}: PageProps) {
     const [totPages, setTotPages] = useState<number>(0)
+
     useEffect(() => {
         console.log(Math.ceil(count/pageSize))
         setTotPages(Math.ceil(count/pageSize))
-    }, [])
+    }, [pageSize])
+
+    function prevPage() {
+        if (page === 1) {
+            return
+        }
+        setPage(prev => prev - 1)
+    }
+
+    function nextPage() {
+        if (page === totPages) {
+            return
+        }
+        setPage(prev => prev + 1)
+    }
+
     return (
-        <div className="flex space-x-4 items-center">
+        <div className="flex space-x-8 items-center">
             <Image
-                className="cursor-pointer"
-                onClick={() => setPage(prev => prev - 1)}
+                className={(page === 1) ? "cursor-not-allowed" : "cursor-pointer"}
+                onClick={prevPage}
                 src={(page === 1) ? "/left-arrow-disabled-icon.svg" : "/left-arrow-icon.svg" }
                 alt="Left Select Icon"
                 width={12}
@@ -37,8 +53,8 @@ export default function PageSelection({page, count, pageSize, setPage}: PageProp
                 })
             }
             <Image
-                className="cursor-pointer"
-                onClick={() => setPage(prev => prev + 1)}
+                className={(page === totPages) ? "cursor-not-allowed" : "cursor-pointer"}
+                onClick={nextPage}
                 src={(page === totPages) ? "/right-arrow-disabled-icon.svg" : "/right-arrow-icon.svg" }
                 alt="Right Select Icon"
                 width={12}
