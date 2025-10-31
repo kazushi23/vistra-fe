@@ -12,6 +12,8 @@ export default function FilePreview({files}: FilePreviewProps) {
                         <Image
                         src={URL.createObjectURL(file)}
                         alt={file.name}
+                        width={10}
+                        height={10}
                         className="w-10 h-10 object-cover rounded"
                         />
                     ) : (

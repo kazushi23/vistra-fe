@@ -4,11 +4,13 @@ import FilePreview from "./filepreview";
 import { CreateFilesResponse } from "@/lib/types";
 import { createFilesMock } from "@/lib/api/document";
 import { MAX_FILE_SIZE_MB, ALLOWED_TYPES } from "@/lib/static/filefolderoptions";
+import { useToast } from "../base/toast";
 
 export default function UploadFiles() {
     const [openUploadFiles, setOpenUploadFiles] = useState<boolean>(false);
     const [files, setFiles] = useState<File[]>([]);
     const [error, setError] = useState<string>("");
+    const {showToast} = useToast();
 
     const handleFiles = (selectedFiles: FileList | File[]) => {
         const fileArray = Array.from(selectedFiles);
@@ -35,13 +37,15 @@ export default function UploadFiles() {
 
     const handleUpload = async () => {
         if (files.length === 0) {
+            showToast("Error", "Please select at least one file")
             setError("Please select at least one file");
             return;
         }
         try {
             const res: CreateFilesResponse = await createFilesMock(files)
+            showToast("Success", "Files created successfully")
         } catch (error: any) {
-            setError("Something went wrong, please try again.")
+            showToast("Error", "Something went wrong, please try again.")
         } finally {
             // clear files after upload
             setFiles([]);

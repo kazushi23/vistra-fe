@@ -5,17 +5,9 @@ import PageSelection from "../table/pageselection";
 import { GetDatetimeString } from "@/utils/utils";
 import { ListProps } from "@/lib/types";
 
-export default function List({
-  documentData,
-  count,
-  pageSize,
-  setPageSize,
-  page,
-  setPage,
-}: ListProps) {
+export default function List({documentData,count,pageSize,setPageSize,page,setPage,}: ListProps) {
   return (
     <section>
-      {/* Scrollable Table Container */}
       <div className="relative shadow-md sm:rounded-lg my-8 overflow-x-auto">
         <div className="max-h-[600px] overflow-y-auto">
           <table className="w-full min-w-[700px] text-sm text-left rtl:text-right text-gray-500">
