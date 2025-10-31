@@ -3,19 +3,13 @@
 import { useEffect, useState } from "react";
 import { Dispatch, SetStateAction } from "react";
 import Image from "next/image";
+import { PageProps } from "@/lib/types";
 
-interface PageProps {
-    page: number;
-    count: number;
-    pageSize: number;
-    setPage: Dispatch<SetStateAction<number>>;
-}
 
 export default function PageSelection({page, count, pageSize, setPage}: PageProps) {
     const [totPages, setTotPages] = useState<number>(0)
 
     useEffect(() => {
-        console.log(Math.ceil(count/pageSize))
         setTotPages(Math.ceil(count/pageSize))
     }, [pageSize])
 

@@ -1,13 +1,8 @@
 import { Dispatch, SetStateAction } from "react";
-import { pageSizes } from "@/lib/static/pagesizes";
+import { pageSizes } from "@/lib/static/pagesizesoptions";
 import { useRef, useEffect, useState } from "react";
+import { PageSizeDropdownProps } from "@/lib/types";
 
-interface PageSizeDropdownProps {
-  pageSize: number;
-  setPageSize: Dispatch<SetStateAction<number>>;
-  openSelection: boolean;
-  setOpenSelection: Dispatch<SetStateAction<boolean>>;
-}
 
 export default function PageSizeDropdown({
   pageSize,

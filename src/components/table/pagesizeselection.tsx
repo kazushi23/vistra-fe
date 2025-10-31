@@ -2,11 +2,8 @@ import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 import { useState } from "react";
 import PageSizeDropdown from "./pagesizedropdown";
+import { PageSizeProps } from "@/lib/types";
 
-interface PageSizeProps {
-    pageSize: number;
-    setPageSize: Dispatch<SetStateAction<number>>;
-}
 
 export default function PageSizeSelection({pageSize, setPageSize}: PageSizeProps) {
         const [openSelection, setOpenSelection] = useState<boolean>(false)

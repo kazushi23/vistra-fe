@@ -1,11 +1,11 @@
 'use client';
 
 import { getDocumentsMock } from "@/lib/api/document";
-import Heading from "../components/heading"
-import List from "../components/list";
+import Heading from "../components/home/heading"
+import List from "../components/table/list";
 import {useEffect, useState} from "react"
 import { DocumentItem, GetDocumentResponse } from "@/lib/types";
-import { pageSizes } from "@/lib/static/pagesizes";
+import { pageSizes } from "@/lib/static/pagesizesoptions";
 
 export default function Home() {
   const [documents, setDocuments] = useState<DocumentItem[]>([])
@@ -21,13 +21,14 @@ export default function Home() {
         setDocuments(res.data)
         setDocumentsCount(res.count)
       } catch(error) {
-        alert("Something went wrong")
+        alert("Something went wrong, please try again.")
       } finally {
         setLoading(false)
       }
     }
     fetchDocuments()
   }, [page, pageSize])
+  
   return (
     <div className="min-h-screen p-8">
       <main>
