@@ -80,6 +80,29 @@ export interface PageSizeDropdownProps {
 }
 
 export interface PageSizeProps {
-    pageSize: number;
-    setPageSize: Dispatch<SetStateAction<number>>;
+  pageSize: number;
+  setPageSize: Dispatch<SetStateAction<number>>;
+}
+
+export interface SearchProps {
+  search: string;
+  setSearch: Dispatch<SetStateAction<string>>;
+}
+
+/*
+Home Components
+*/
+
+export interface HeadingProps {
+  onFileFolderCreated: () => void;
+  search: string;
+  setSearch: Dispatch<SetStateAction<string>>;
+}
+
+export interface FolderProps {
+  onFolderCreated: () => void;
+}
+
+export interface FileProps {
+  onFileCreated: () => void;
 }

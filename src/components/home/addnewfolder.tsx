@@ -3,8 +3,9 @@ import Button from "../base/button"
 import { useState } from "react"
 import { createFolderMock } from "@/lib/api/document"
 import { useToast } from "../base/toast"
+import { FolderProps } from "@/lib/types"
 
-export default function AddNewFolder() {
+export default function AddNewFolder({onFolderCreated}: FolderProps) {
     const [openAddNewFolder, setOpenAddNewFolder] = useState<boolean>(false)
     const [folderName, setFolderName] = useState<string>("")
     const {showToast} = useToast();
@@ -15,12 +16,13 @@ export default function AddNewFolder() {
     async function handleCreate() {
         try {
             const res: CreateFolderResponse = await createFolderMock(folderName)
-            showToast("Success", "Folder created successfully")
+            setFolderName("")
+            setOpenAddNewFolder(false)
         } catch(error: any) {
             showToast("Error", "Something went wrong, please try again")
         } finally {
-            setFolderName("")
-            setOpenAddNewFolder(false)
+            onFolderCreated()
+            showToast("Success", "Folder created successfully")
         }
     }
 

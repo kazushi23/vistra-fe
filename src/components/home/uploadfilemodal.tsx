@@ -5,8 +5,9 @@ import { CreateFilesResponse } from "@/lib/types";
 import { createFilesMock } from "@/lib/api/document";
 import { MAX_FILE_SIZE_MB, ALLOWED_TYPES } from "@/lib/static/filefolderoptions";
 import { useToast } from "../base/toast";
+import { FileProps } from "@/lib/types";
 
-export default function UploadFiles() {
+export default function UploadFiles({onFileCreated}: FileProps) {
     const [openUploadFiles, setOpenUploadFiles] = useState<boolean>(false);
     const [files, setFiles] = useState<File[]>([]);
     const [error, setError] = useState<string>("");
@@ -43,14 +44,15 @@ export default function UploadFiles() {
         }
         try {
             const res: CreateFilesResponse = await createFilesMock(files)
-            showToast("Success", "Files created successfully")
+            setFiles([]);
+            setOpenUploadFiles(false);
+            setError("");
         } catch (error: any) {
             showToast("Error", "Something went wrong, please try again.")
         } finally {
             // clear files after upload
-            setFiles([]);
-            setOpenUploadFiles(false);
-            setError("");
+            onFileCreated()
+            showToast("Success", "Files created successfully")
         }
     };
 

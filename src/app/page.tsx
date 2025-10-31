@@ -6,6 +6,7 @@ import List from "../components/table/list";
 import {useEffect, useState} from "react"
 import { DocumentItem, GetDocumentResponse } from "@/lib/types";
 import { pageSizes } from "@/lib/static/pagesizesoptions";
+import { useToast } from "@/components/base/toast";
 
 export default function Home() {
   const [documents, setDocuments] = useState<DocumentItem[]>([])
@@ -13,26 +14,40 @@ export default function Home() {
   const [loading, setLoading] = useState<boolean>(true)
   const [pageSize, setPageSize] = useState<number>(pageSizes[0])
   const [page, setPage] = useState<number>(1)
+  const [search, setSearch] = useState<string>("")
+  const {showToast} = useToast();
+
+  async function fetchDocuments() {
+    try {
+      const res: GetDocumentResponse = await getDocumentsMock(pageSize, page, search)
+      setDocuments(res.data)
+      setDocumentsCount(res.count)
+    } catch(error) {
+      showToast("Error", "Something went wrong, please try again.")
+    } finally {
+      setLoading(false)
+    }
+  }
 
   useEffect(() => {
-    async function fetchDocuments() {
-      try {
-        const res: GetDocumentResponse = await getDocumentsMock(pageSize, page)
-        setDocuments(res.data)
-        setDocumentsCount(res.count)
-      } catch(error) {
-        alert("Something went wrong, please try again.")
-      } finally {
-        setLoading(false)
-      }
-    }
     fetchDocuments()
   }, [page, pageSize])
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      if (search.trim() !== "") {
+        setPage(1); // reset page when searching
+      }
+      fetchDocuments();
+    }, 500); // delay 500ms after user stops typing
+
+    return () => clearTimeout(handler);
+  }, [search]);
   
   return (
     <div className="min-h-screen p-8">
       <main>
-        <Heading/>
+        <Heading onFileFolderCreated={fetchDocuments} search={search} setSearch={setSearch}/>
         {!loading && <List documentData={documents} count={documentCount} pageSize={pageSize} setPageSize={setPageSize} page={page} setPage={setPage}/>}
         </main>
     </div>

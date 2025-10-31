@@ -3,14 +3,23 @@ import { documentMock } from "../mocks/document";
 import { CreateFilesResponse, CreateFolderResponse, DocumentItem, GetDocumentResponse } from "../types";
 import { documentCountMock } from "../mocks/documentcount";
 
-export async function getDocumentsMock(pageSize: number, page: number): Promise<GetDocumentResponse> {
+export async function getDocumentsMock(pageSize: number, page: number, search: string): Promise<GetDocumentResponse> {
   // simulate async API call
+  console.log(pageSize, page, search)
   return new Promise((resolve) => {
     setTimeout(() => {
-      const startIndex: number = pageSize * (page - 1)
-      const endIndex: number = pageSize * (page)
+      let filtered: DocumentItem[] = documentMock
+      
+      if (search.trim() !== "") {
+        const regex = new RegExp(search, "i"); // ✅ define regex
+        filtered =  filtered.filter((i) => regex.test(i.name));
+      }
+
+      const startIndex = pageSize * (page - 1);
+      const endIndex = startIndex + pageSize;
+
       const res: GetDocumentResponse = {
-        data: documentMock.slice(startIndex,endIndex),
+        data: filtered.slice(startIndex,endIndex),
         count: documentCountMock
       }
       resolve(res)
