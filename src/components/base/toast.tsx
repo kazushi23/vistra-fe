@@ -8,7 +8,7 @@ export default function ToastProvider({ children }: { children: ReactNode }) {
     const [toasts, setToasts] = useState<ToastProps[]>([]);
     
     const showToast = (toastType: ToastType, message: string) => {
-        const id = Date.now();
+        const id: number = Date.now();
         setToasts((prev) => [...prev, { id, toastType, message }]);
         setTimeout(() => {
             setToasts((prev) => prev.filter((toast) => toast.id !== id));
@@ -38,7 +38,7 @@ export default function ToastProvider({ children }: { children: ReactNode }) {
 }
 
 export const useToast = (): ToastContextType => {
-  const context = useContext(ToastContext);
+  const context: ToastContextType | undefined = useContext(ToastContext);
   if (!context) throw new Error("useToast must be used within a ToastProvider");
   return context;
 };
