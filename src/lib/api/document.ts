@@ -1,18 +1,26 @@
-import { NextRequest, NextResponse } from "next/server";
 import { documentMock } from "../mocks/document";
-import { CreateFilesResponse, CreateFolderResponse, DocumentItem, GetDocumentResponse } from "../types";
+import { CreateFilesResponse, CreateFolderResponse, DocumentItem, DocumentTableSortColumn, GetDocumentResponse } from "../types";
 import { documentCountMock } from "../mocks/documentcount";
 
-export async function getDocumentsMock(pageSize: number, page: number, search: string): Promise<GetDocumentResponse> {
+export async function getDocumentsMock(pageSize: number, page: number, search: string, desc: boolean, column: DocumentTableSortColumn): Promise<GetDocumentResponse> {
   // simulate async API call
-  console.log(pageSize, page, search)
   return new Promise((resolve) => {
     setTimeout(() => {
       let filtered: DocumentItem[] = documentMock
-      
+
       if (search.trim() !== "") {
         const regex = new RegExp(search, "i"); // ✅ define regex
         filtered =  filtered.filter((i) => regex.test(i.name));
+      }
+
+      if (column === "Name") {
+        filtered.sort((a, b) => {
+          if (a.name! < b.name!) return desc ? 1 : -1;
+          if (a.name! > b.name!) return desc ? -1 : 1;
+          return 0;
+        });
+      } else if (column === "UpdatedAt") {
+        filtered.sort((a, b) => (desc ? b.updatedAt - a.updatedAt : a.updatedAt - b.updatedAt));
       }
 
       const startIndex = pageSize * (page - 1);

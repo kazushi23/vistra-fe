@@ -23,16 +23,6 @@ export interface CreateFolderResponse {
 export interface CreateFilesResponse {
   data: boolean;
 }
-
-export interface ListProps {
-  documentData: DocumentItem[];
-  count: number;
-  pageSize: number;
-  setPageSize: Dispatch<SetStateAction<number>>;
-  page: number;
-  setPage: Dispatch<SetStateAction<number>>;
-}
-
 export interface FilePreviewProps {
     files: File[];
 }
@@ -65,11 +55,22 @@ export interface ToastContextType {
 /*
 Table Components
 */
+export interface ListProps {
+  documentData: DocumentItem[];
+  count: number;
+  pageSize: number;
+  setPageSize: Dispatch<SetStateAction<number>>;
+  page: number;
+  setPage: Dispatch<SetStateAction<number>>;
+  sort: DocumentTableSort;
+  setSort: Dispatch<SetStateAction<DocumentTableSort>>
+}
+
 export interface PageProps {
-    page: number;
-    count: number;
-    pageSize: number;
-    setPage: Dispatch<SetStateAction<number>>;
+  page: number;
+  count: number;
+  pageSize: number;
+  setPage: Dispatch<SetStateAction<number>>;
 }
 
 export interface PageSizeDropdownProps {
@@ -87,6 +88,13 @@ export interface PageSizeProps {
 export interface SearchProps {
   search: string;
   setSearch: Dispatch<SetStateAction<string>>;
+}
+
+export type DocumentTableSortColumn = "Name" | "UpdatedAt";
+
+export interface DocumentTableSort {
+  desc: boolean;
+  column: DocumentTableSortColumn;
 }
 
 /*

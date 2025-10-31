@@ -1,11 +1,29 @@
-import { DocumentItem } from "@/lib/types";
+import { DocumentItem, DocumentTableSortColumn } from "@/lib/types";
 import Image from "next/image";
 import PageSizeSelection from "../table/pagesizeselection";
 import PageSelection from "../table/pageselection";
 import { GetDatetimeString } from "@/utils/utils";
 import { ListProps } from "@/lib/types";
 
-export default function List({documentData,count,pageSize,setPageSize,page,setPage,}: ListProps) {
+export default function List({documentData,count,pageSize,setPageSize,page,setPage,sort,setSort}: ListProps) {
+  function getSortIcon(column: DocumentTableSortColumn): string {
+    if (column === sort.column) {
+      return sort.desc 
+        ? "/descending-selected-icon.svg" 
+        : "/ascending-selected-icon.svg";
+    } else {
+      // Inactive column
+      return "/descending-icon.svg";
+    }
+  }
+
+  function handleSort(column: DocumentTableSortColumn) {
+    setSort((prev) => ({
+      desc: prev.column === column ? !prev.desc : true,
+      column,
+    }));
+  }
+
   return (
     <section>
       <div className="relative shadow-md sm:rounded-lg my-8 overflow-x-auto">
@@ -22,9 +40,27 @@ export default function List({documentData,count,pageSize,setPageSize,page,setPa
                     <label className="sr-only">checkbox</label>
                   </div>
                 </th>
-                <th className="px-6 py-3 font-normal">Name</th>
+                <th className="px-6 py-3 font-normal flex space-x-2 cursor-pointer" onClick={() => handleSort("Name")}>
+                    <p>Name</p>
+                    <Image
+                      src={getSortIcon("Name")}
+                      alt="File Type Icon"
+                      width={20}
+                      height={20}
+                      priority
+                    />
+                </th>
                 <th className="px-6 py-3 font-normal">Created by</th>
-                <th className="px-6 py-3 font-normal">Date</th>
+                <th className="px-6 py-3 font-normal flex space-x-2 cursor-pointer" onClick={() => handleSort("UpdatedAt")}>
+                  <p>Date</p>
+                  <Image
+                    src={getSortIcon("UpdatedAt")}
+                    alt="File Type Icon"
+                    width={20}
+                    height={20}
+                    priority
+                  />  
+                </th>
                 <th className="px-6 py-3 font-normal">File size</th>
                 <th className="px-6 py-3 font-normal"></th>
               </tr>

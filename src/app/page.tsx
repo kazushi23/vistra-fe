@@ -6,6 +6,7 @@ import List from "../components/table/list";
 import {useEffect, useState} from "react"
 import { DocumentItem, GetDocumentResponse } from "@/lib/types";
 import { pageSizes } from "@/lib/static/pagesizesoptions";
+import { DocumentTableSort } from "@/lib/types";
 import { useToast } from "@/components/base/toast";
 
 export default function Home() {
@@ -15,11 +16,15 @@ export default function Home() {
   const [pageSize, setPageSize] = useState<number>(pageSizes[0])
   const [page, setPage] = useState<number>(1)
   const [search, setSearch] = useState<string>("")
+  const [sort, setSort] = useState<DocumentTableSort>({
+    desc: true,
+    column: "UpdatedAt",
+  })
   const {showToast} = useToast();
 
   async function fetchDocuments() {
     try {
-      const res: GetDocumentResponse = await getDocumentsMock(pageSize, page, search)
+      const res: GetDocumentResponse = await getDocumentsMock(pageSize, page, search, sort.desc, sort.column)
       setDocuments(res.data)
       setDocumentsCount(res.count)
     } catch(error) {
@@ -31,7 +36,7 @@ export default function Home() {
 
   useEffect(() => {
     fetchDocuments()
-  }, [page, pageSize])
+  }, [page, pageSize, sort])
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -48,7 +53,7 @@ export default function Home() {
     <div className="min-h-screen p-8">
       <main>
         <Heading onFileFolderCreated={fetchDocuments} search={search} setSearch={setSearch}/>
-        {!loading && <List documentData={documents} count={documentCount} pageSize={pageSize} setPageSize={setPageSize} page={page} setPage={setPage}/>}
+        {!loading && <List documentData={documents} count={documentCount} pageSize={pageSize} setPageSize={setPageSize} page={page} setPage={setPage} sort={sort} setSort={setSort}/>}
         </main>
     </div>
   );
