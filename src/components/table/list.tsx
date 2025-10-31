@@ -24,7 +24,9 @@ export default function List({documentData,count,pageSize,setPageSize,page,setPa
       column,
     }));
   }
-
+  /*
+  @TODO yet to implement select row and select all rows
+  */
   return (
     <section>
       <div className="relative shadow-md sm:rounded-lg my-8 overflow-x-auto">

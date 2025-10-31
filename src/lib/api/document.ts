@@ -23,7 +23,6 @@ export async function getDocumentsMock(pageSize: number, page: number, search: s
       }
 
       const count: number = filtered.length
-      console.log(count)
       const startIndex: number = pageSize * (page - 1);
       const endIndex: number = startIndex + pageSize;
 

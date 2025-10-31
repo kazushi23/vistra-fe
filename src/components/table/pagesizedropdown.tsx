@@ -15,9 +15,9 @@ export default function PageSizeDropdown({
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
-        if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-            setOpenSelection(false);
-        }
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+                setOpenSelection(false);
+            }
         };
         document.addEventListener("mousedown", handleClickOutside);
         return () => document.removeEventListener("mousedown", handleClickOutside);
