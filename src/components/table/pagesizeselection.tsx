@@ -3,6 +3,7 @@ import { Dispatch, SetStateAction } from "react";
 import { useState } from "react";
 import PageSizeDropdown from "./pagesizedropdown";
 import { PageSizeProps } from "@/lib/types";
+import { DownIcon } from "@/lib/static/icons";
 
 
 export default function PageSizeSelection({pageSize, setPageSize}: PageSizeProps) {
@@ -20,7 +21,7 @@ export default function PageSizeSelection({pageSize, setPageSize}: PageSizeProps
                     className="flex-1 w-8 bg-transparent outline-none text-black placeholder-gray-400 text-sm"
                 />
                 <Image
-                    src="/down-icon.svg"
+                    src={DownIcon}
                     alt="Down Icon"
                     width={8}
                     height={8}

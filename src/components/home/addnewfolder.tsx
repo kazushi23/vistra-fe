@@ -4,6 +4,7 @@ import { useState } from "react"
 import { createFolderMock } from "@/lib/api/document"
 import { useToast } from "../base/toast"
 import { FolderProps } from "@/lib/types"
+import { plusIcon } from "@/lib/static/icons"
 
 export default function AddNewFolder({onFolderCreated}: FolderProps) {
     const [openAddNewFolder, setOpenAddNewFolder] = useState<boolean>(false)
@@ -28,7 +29,7 @@ export default function AddNewFolder({onFolderCreated}: FolderProps) {
 
     return (
         <div>
-            <Button variant="primary" label="Add new folder" iconSrc="/add-icon.svg" iconAlt="Add Icon" onClick={openModal}/>
+            <Button variant="primary" label="Add new folder" iconSrc={plusIcon} iconAlt="Add Icon" onClick={openModal}/>
             {openAddNewFolder && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
                 <div className="bg-white rounded-lg w-96 p-6 shadow-lg">

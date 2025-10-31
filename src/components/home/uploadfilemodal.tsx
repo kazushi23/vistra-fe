@@ -6,6 +6,7 @@ import { createFilesMock } from "@/lib/api/document";
 import { MAX_FILE_SIZE_MB, ALLOWED_TYPES } from "@/lib/static/filefolderoptions";
 import { useToast } from "../base/toast";
 import { FileProps } from "@/lib/types";
+import { UploadIcon } from "@/lib/static/icons";
 
 export default function UploadFiles({onFileCreated}: FileProps) {
     const [openUploadFiles, setOpenUploadFiles] = useState<boolean>(false);
@@ -70,7 +71,7 @@ export default function UploadFiles({onFileCreated}: FileProps) {
 
   return (
     <div>
-        <Button variant="secondary" label="Upload files" iconSrc="/upload-icon.svg" iconAlt="Upload Icon" onClick={() => setOpenUploadFiles(true)}/>
+        <Button variant="secondary" label="Upload files" iconSrc={UploadIcon} iconAlt="Upload Icon" onClick={() => setOpenUploadFiles(true)}/>
 
         {openUploadFiles && (
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">

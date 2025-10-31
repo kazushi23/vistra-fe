@@ -2,18 +2,19 @@ import { DocumentItem, DocumentTableSortColumn } from "@/lib/types";
 import Image from "next/image";
 import PageSizeSelection from "../table/pagesizeselection";
 import PageSelection from "../table/pageselection";
-import { GetDatetimeString } from "@/utils/utils";
+import { GetDatetimeString } from "@/utils/date";
 import { ListProps } from "@/lib/types";
+import { AscSelIcon, DescIcon, DescSelIcon, DotMenuFileIcon, DotMenuFolderIcon, FileIcon, FolderIcon } from "@/lib/static/icons";
 
 export default function List({documentData,count,pageSize,setPageSize,page,setPage,sort,setSort}: ListProps) {
   function getSortIcon(column: DocumentTableSortColumn): string {
     if (column === sort.column) {
       return sort.desc 
-        ? "/descending-selected-icon.svg" 
-        : "/ascending-selected-icon.svg";
+        ? DescSelIcon
+        : AscSelIcon;
     } else {
       // Inactive column
-      return "/descending-icon.svg";
+      return DescIcon;
     }
   }
 
@@ -82,7 +83,7 @@ export default function List({documentData,count,pageSize,setPageSize,page,setPa
                   </td>
                   <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap flex space-x-3">
                     <Image
-                      src={doc.isFile ? "/file-icon.svg" : "/folder-icon.svg"}
+                      src={doc.isFile ? FileIcon: FolderIcon}
                       alt="File Type Icon"
                       width={20}
                       height={20}
@@ -95,7 +96,7 @@ export default function List({documentData,count,pageSize,setPageSize,page,setPa
                   <td className="px-6 py-4">{doc.sizeKB ? `${doc.sizeKB} KB` : "-"}</td>
                   <td className="px-6 py-4 cursor-pointer">
                     <Image
-                      src={doc.isFile ? "/dot-menu-file-icon.svg" : "/dot-menu-folder-icon.svg"}
+                      src={doc.isFile ? DotMenuFileIcon : DotMenuFolderIcon}
                       alt="Menu Icon"
                       width={12}
                       height={12}

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Dispatch, SetStateAction } from "react";
 import Image from "next/image";
 import { PageProps } from "@/lib/types";
+import { LeftArrowDisabledIcon, LeftArrowIcon, RightArrowDisabledIcon, RightArrowIcon } from "@/lib/static/icons";
 
 
 export default function PageSelection({page, count, pageSize, setPage}: PageProps) {
@@ -32,7 +33,7 @@ export default function PageSelection({page, count, pageSize, setPage}: PageProp
             <Image
                 className={(page === 1) ? "cursor-not-allowed" : "cursor-pointer"}
                 onClick={prevPage}
-                src={(page === 1) ? "/left-arrow-disabled-icon.svg" : "/left-arrow-icon.svg" }
+                src={(page === 1) ? LeftArrowDisabledIcon: LeftArrowIcon}
                 alt="Left Select Icon"
                 width={12}
                 height={12}
@@ -49,7 +50,7 @@ export default function PageSelection({page, count, pageSize, setPage}: PageProp
             <Image
                 className={(page === totPages) ? "cursor-not-allowed" : "cursor-pointer"}
                 onClick={nextPage}
-                src={(page === totPages) ? "/right-arrow-disabled-icon.svg" : "/right-arrow-icon.svg" }
+                src={(page === totPages) ? RightArrowDisabledIcon: RightArrowIcon }
                 alt="Right Select Icon"
                 width={12}
                 height={12}
