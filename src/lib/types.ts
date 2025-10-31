@@ -38,8 +38,9 @@ export interface ButtonProps {
   iconAlt?: string;
   onClick?: () => void;
 }
-
-// Toast
+/*
+Toast
+*/
 export type ToastType = "Success" | "Warning" | "Error"
 
 export interface ToastProps {

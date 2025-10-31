@@ -4,12 +4,7 @@ import { useRef, useEffect, useState } from "react";
 import { PageSizeDropdownProps } from "@/lib/types";
 
 
-export default function PageSizeDropdown({
-  pageSize,
-  setPageSize,
-  openSelection,
-  setOpenSelection,
-}: PageSizeDropdownProps) {
+export default function PageSizeDropdown({pageSize,setPageSize,openSelection,setOpenSelection,}: PageSizeDropdownProps) {
     const dropdownRef = useRef<HTMLDivElement | null>(null);
     const [displayUp, setDisplayUp] = useState<boolean | null>(null)
 
