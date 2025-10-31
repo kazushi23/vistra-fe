@@ -1,6 +1,5 @@
 import { documentMock } from "../mocks/document";
 import { CreateFilesResponse, CreateFolderResponse, DocumentItem, DocumentTableSortColumn, GetDocumentResponse } from "../types";
-import { documentCountMock } from "../mocks/documentcount";
 
 export async function getDocumentsMock(pageSize: number, page: number, search: string, desc: boolean, column: DocumentTableSortColumn): Promise<GetDocumentResponse> {
   // simulate async API call
@@ -23,12 +22,14 @@ export async function getDocumentsMock(pageSize: number, page: number, search: s
         filtered.sort((a, b) => (desc ? b.updatedAt - a.updatedAt : a.updatedAt - b.updatedAt));
       }
 
-      const startIndex = pageSize * (page - 1);
-      const endIndex = startIndex + pageSize;
+      const count: number = filtered.length
+      console.log(count)
+      const startIndex: number = pageSize * (page - 1);
+      const endIndex: number = startIndex + pageSize;
 
       const res: GetDocumentResponse = {
         data: filtered.slice(startIndex,endIndex),
-        count: documentCountMock
+        count: count
       }
       resolve(res)
     }, 500) // optional delay

@@ -11,7 +11,7 @@ export default function PageSelection({page, count, pageSize, setPage}: PageProp
 
     useEffect(() => {
         setTotPages(Math.ceil(count/pageSize))
-    }, [pageSize])
+    }, [pageSize, count])
 
     function prevPage() {
         if (page === 1) {

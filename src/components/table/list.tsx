@@ -70,7 +70,7 @@ export default function List({documentData,count,pageSize,setPageSize,page,setPa
               {documentData.map((doc) => (
                 <tr
                   key={doc.id}
-                  className="bg-white border-b border-gray-200 hover:bg-gray-50"
+                  className="bg-white border-b border-gray-200 hover:bg-gray-50 cursor-pointer"
                 >
                   <td className="w-4 p-4">
                     <div className="flex items-center">
