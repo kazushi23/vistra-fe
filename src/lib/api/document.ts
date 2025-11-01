@@ -1,5 +1,7 @@
 import { documentMock } from "../mocks/document";
-import { CreateFilesResponse, CreateFolderResponse, DocumentItem, DocumentTableSortColumn, GetDocumentResponse } from "../types";
+import { CreateFilesResponse, CreateFolderResponse, DocumentItem, DocumentTableSortColumn, FileMetaData, GetDocumentResponse } from "../types";
+
+const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export async function getDocumentsMock(pageSize: number, page: number, search: string, desc: boolean, column: DocumentTableSortColumn): Promise<GetDocumentResponse> {
   // simulate async API call
@@ -35,31 +37,67 @@ export async function getDocumentsMock(pageSize: number, page: number, search: s
   });
 }
 
-export async function createFolderMock(folderName: string): Promise<CreateFolderResponse> {
-  // simulate async API call
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      // can do validation here
-      const res: CreateFolderResponse = {
-        data: true
-      }
-      resolve(res)
-    }, 500) // optional delay
+// export async function createFolderMock(folderName: string): Promise<CreateFolderResponse> {
+//   // simulate async API call
+//   return new Promise((resolve) => {
+//     setTimeout(() => {
+//       // can do validation here
+//       const res: CreateFolderResponse = {
+//         data: true
+//       }
+//       resolve(res)
+//     }, 500) // optional delay
+//   });
+// }
+
+// export async function createFilesMock(files: File[]): Promise<CreateFilesResponse> {
+//   // simulate async API call
+//   return new Promise((resolve) => {
+//     setTimeout(() => {
+//       // can do validation here
+//       const res: CreateFilesResponse = {
+//         data: true
+//       }
+//       resolve(res)
+//     }, 500) // optional delay
+//   });
+// }
+
+export async function createFolder(folderName: string): Promise<CreateFolderResponse> {
+  const res = await fetch(`${BASE_URL}/api/v1/document/create/folder`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ name: folderName }),
   });
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(text || "Failed to create folder");
+  }
+
+  const data: CreateFolderResponse = await res.json();
+  return data;
 }
 
-export async function createFilesMock(files: File[]): Promise<CreateFilesResponse> {
-  // simulate async API call
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      // can do validation here
-      const res: CreateFilesResponse = {
-        data: true
-      }
-      resolve(res)
-    }, 500) // optional delay
+export async function createFiles(files: FileMetaData[]): Promise<CreateFilesResponse> {
+  const res = await fetch(`${BASE_URL}/api/v1/document/create/file`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ files: files }),
   });
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(text || "Failed to create folder");
+  }
+
+  const data: CreateFilesResponse = await res.json();
+  return data;
 }
+
+
 
 
 // export async function getDocuments(req: NextRequest): Promise<DocumentItem[]> {

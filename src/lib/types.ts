@@ -17,15 +17,25 @@ export interface GetDocumentResponse {
 }
 
 export interface CreateFolderResponse {
-  data: boolean;
+  type: "Success" | "Error";
+  message: string;
+  data: DocumentItem;
 }
 
 export interface CreateFilesResponse {
-  data: boolean;
+  type: "Success" | "Error";
+  message: string;
+  data: DocumentItem[];
 }
 export interface FilePreviewProps {
     files: File[];
 }
+
+export interface FileMetaData {
+    name: string;
+    size: number;
+}
+
 
 /*
 Base components

@@ -1,8 +1,8 @@
 import Button from "../base/button";
 import { useState } from "react";
 import FilePreview from "./filepreview";
-import { CreateFilesResponse } from "@/lib/types";
-import { createFilesMock } from "@/lib/api/document";
+import { CreateFilesResponse, FileMetaData } from "@/lib/types";
+import { createFiles } from "@/lib/api/document";
 import { MAX_FILE_SIZE_MB, ALLOWED_TYPES } from "@/lib/static/filefolderoptions";
 import { useToast } from "../base/toast";
 import { FileProps } from "@/lib/types";
@@ -11,11 +11,13 @@ import { UploadIcon } from "@/lib/static/icons";
 export default function UploadFiles({onFileCreated}: FileProps) {
     const [openUploadFiles, setOpenUploadFiles] = useState<boolean>(false);
     const [files, setFiles] = useState<File[]>([]);
+    const [fileMetaDatas, setFileMetaDatas] = useState<FileMetaData[]>([])
     const [error, setError] = useState<string>("");
     const {showToast} = useToast();
 
     const handleFiles = (selectedFiles: FileList | File[]) => {
         const fileArray = Array.from(selectedFiles);
+        const metaDataArray: FileMetaData[] = []
 
         for (const file of fileArray) {
             if (!ALLOWED_TYPES.includes(file.type)) {
@@ -26,10 +28,12 @@ export default function UploadFiles({onFileCreated}: FileProps) {
                 setError(`File too large (max ${MAX_FILE_SIZE_MB}MB): ${file.name}`);
                 return;
             }
+            metaDataArray.push({name: file.name, size: file.size})
         }
 
         // Append new files to existing ones
         setFiles((prev) => [...prev, ...fileArray]);
+        setFileMetaDatas((prev) => [...prev, ...metaDataArray]);
         setError("");
     };
 
@@ -44,16 +48,14 @@ export default function UploadFiles({onFileCreated}: FileProps) {
             return;
         }
         try {
-            const res: CreateFilesResponse = await createFilesMock(files)
+            const res: CreateFilesResponse = await createFiles(fileMetaDatas)
             setFiles([]);
             setOpenUploadFiles(false);
             setError("");
-        } catch (error: any) {
-            showToast("Error", "Something went wrong, please try again.")
-        } finally {
-            // clear files after upload
             onFileCreated()
             showToast("Success", "Files created successfully")
+        } catch (error: any) {
+            showToast("Error", "Something went wrong, please try again.")
         }
     };
 
