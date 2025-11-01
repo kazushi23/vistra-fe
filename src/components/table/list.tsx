@@ -1,12 +1,11 @@
-import { DocumentItem, DocumentTableSortColumn } from "@/lib/types";
-import Image from "next/image";
+import { DocumentTableSortColumn } from "@/lib/types";
 import PageSizeSelection from "../table/pagesizeselection";
 import PageSelection from "../table/pageselection";
-import { GetDatetimeString } from "@/utils/date";
 import { ListProps } from "@/lib/types";
-import { AscSelIcon, DescIcon, DescSelIcon, DotMenuFileIcon, DotMenuFolderIcon, FileIcon, FolderIcon } from "@/lib/static/icons";
-import Row from "./row";
+import { AscSelIcon, DescIcon, DescSelIcon } from "@/lib/static/icons";
+import ListRow from "./listrow";
 import EmptyTable from "../base/emptyTable";
+import ListHeader from "./listheader";
 
 export default function List({documentData,count,pageSize,setPageSize,page,setPage,sort,setSort}: ListProps) {
   function getSortIcon(column: DocumentTableSortColumn): string {
@@ -35,45 +34,12 @@ export default function List({documentData,count,pageSize,setPageSize,page,setPa
         <div className="max-h-[600px] overflow-y-auto">
           <table className="w-full min-w-[700px] text-sm text-left rtl:text-right text-gray-500">
             <thead className="text-xs text-white bg-[#011b56] sticky top-0 z-10">
-              <tr>
-                <th className="p-4 w-4">
-                  <div className="flex items-center">
-                    <input
-                      type="checkbox"
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 focus:ring-2"
-                    />
-                    <label className="sr-only">checkbox</label>
-                  </div>
-                </th>
-                <th className="px-6 py-3 font-normal flex space-x-2 cursor-pointer" onClick={() => handleSort("name")}>
-                    <p>Name</p>
-                    <Image
-                      src={getSortIcon("name")}
-                      alt="File Type Icon"
-                      width={20}
-                      height={20}
-                      priority
-                    />
-                </th>
-                <th className="px-6 py-3 font-normal">Created by</th>
-                <th className="px-6 py-3 font-normal flex space-x-2 cursor-pointer" onClick={() => handleSort("updatedAt")}>
-                  <p>Date</p>
-                  <Image
-                    src={getSortIcon("updatedAt")}
-                    alt="File Type Icon"
-                    width={20}
-                    height={20}
-                    priority
-                  />  
-                </th>
-                <th className="px-6 py-3 font-normal">File size</th>
-                <th className="px-6 py-3 font-normal"></th>
-              </tr>
+              <ListHeader getSortIcon={getSortIcon} handleSort={handleSort}/>
             </thead>
 
             <tbody>
               {documentData&& documentData.length > 0 ? documentData.map((doc) => (
-                <Row id={doc.id} name={doc.name} createdBy={doc.createdBy} updatedAt={doc.updatedAt} size={doc.size} type={doc.type} />
+                <ListRow id={doc.id} name={doc.name} createdBy={doc.createdBy} updatedAt={doc.updatedAt} size={doc.size} type={doc.type} />
               )): 
                 <EmptyTable colspan={6}/>
               }

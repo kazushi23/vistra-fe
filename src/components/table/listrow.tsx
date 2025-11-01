@@ -3,7 +3,7 @@ import Image from "next/image";
 import { FileIcon, FolderIcon, DotMenuFileIcon, DotMenuFolderIcon } from "@/lib/static/icons";
 import { GetDatetimeString } from "@/utils/date";
 
-export default function Row({id, name, createdBy, updatedAt, size, type}: DocumentItem) {
+export default function ListRow({id, name, createdBy, updatedAt, size, type}: DocumentItem) {
     return (
         <tr key={id}
             className="bg-white border-b border-gray-200 hover:bg-gray-50 cursor-pointer"

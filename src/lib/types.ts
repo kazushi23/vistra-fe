@@ -108,8 +108,13 @@ export interface DocumentTableSort {
   column: DocumentTableSortColumn;
 }
 
-export interface EmptyColumnsCount {
+export interface EmptyColumnsCountProps {
   colspan: number;
+}
+
+export interface ListHeaderProps {
+  getSortIcon: Function;
+  handleSort: Function;
 }
 /*
 Home Components
