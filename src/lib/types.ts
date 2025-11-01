@@ -12,6 +12,8 @@ export interface DocumentItem {
 }
 
 export interface GetDocumentResponse {
+  type: "Success" | "Error";
+  message: string;
   data: DocumentItem[];
   count: number;
 }

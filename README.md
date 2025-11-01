@@ -6,8 +6,8 @@ TODO:
 validation
 typescript
 comments
-table display when data is empty
-table height will jump
+table display when data is empty -- DONE
+table height will jump -- DONE
 selection (single and all)
 
 Reasonings:
