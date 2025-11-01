@@ -1,6 +1,7 @@
 export const plusIcon: string = "add-icon.svg"
 export const AscIcon: string = "ascending-icon.svg"
 export const AscSelIcon: string = "ascending-selected-icon.svg"
+export const Dataicon: string = "data-icon.svg"
 export const DescIcon: string = "descending-icon.svg"
 export const DescSelIcon: string = "descending-selected-icon.svg"
 export const DotMenuFileIcon: string = "dot-menu-file-icon.svg"
