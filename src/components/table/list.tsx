@@ -5,6 +5,7 @@ import PageSelection from "../table/pageselection";
 import { GetDatetimeString } from "@/utils/date";
 import { ListProps } from "@/lib/types";
 import { AscSelIcon, DescIcon, DescSelIcon, DotMenuFileIcon, DotMenuFolderIcon, FileIcon, FolderIcon } from "@/lib/static/icons";
+import Row from "./row";
 
 export default function List({documentData,count,pageSize,setPageSize,page,setPage,sort,setSort}: ListProps) {
   function getSortIcon(column: DocumentTableSortColumn): string {
@@ -71,41 +72,7 @@ export default function List({documentData,count,pageSize,setPageSize,page,setPa
 
             <tbody>
               {documentData&& documentData.length > 0 ? documentData.map((doc) => (
-                <tr
-                  key={doc.id}
-                  className="bg-white border-b border-gray-200 hover:bg-gray-50 cursor-pointer"
-                >
-                  <td className="w-4 p-4">
-                    <div className="flex items-center">
-                      <input
-                        type="checkbox"
-                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 focus:ring-2"
-                      />
-                    </div>
-                  </td>
-                  <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap flex space-x-3">
-                    <Image
-                      src={doc.type === "file" ? FileIcon: FolderIcon}
-                      alt="File Type Icon"
-                      width={20}
-                      height={20}
-                      priority
-                    />
-                    <p>{doc.name ?? "-"}</p>
-                  </th>
-                  <td className="px-6 py-4">{doc.createdBy ?? "-"}</td>
-                  <td className="px-6 py-4">{GetDatetimeString(Number(doc.updatedAt))}</td>
-                  <td className="px-6 py-4">{doc.size ? `${doc.size / 1024} KB` : "-"}</td>
-                  <td className="px-6 py-4 cursor-pointer">
-                    <Image
-                      src={doc.type === "file" ? DotMenuFileIcon : DotMenuFolderIcon}
-                      alt="Menu Icon"
-                      width={12}
-                      height={12}
-                      priority
-                    />
-                  </td>
-                </tr>
+                <Row id={doc.id} name={doc.name} createdBy={doc.createdBy} updatedAt={doc.updatedAt} size={doc.size} type={doc.type} />
               )): 
                 <tr>
                   <td colSpan={6} className="text-center py-4">
