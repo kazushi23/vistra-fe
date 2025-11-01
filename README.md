@@ -8,6 +8,7 @@ typescript
 comments
 table display when data is empty
 table height will jump
+selection (single and all)
 
 Reasonings:
 send over file metadata {name, size} instead of files as we are mimicing file upload

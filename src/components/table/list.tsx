@@ -6,6 +6,7 @@ import { GetDatetimeString } from "@/utils/date";
 import { ListProps } from "@/lib/types";
 import { AscSelIcon, DescIcon, DescSelIcon, DotMenuFileIcon, DotMenuFolderIcon, FileIcon, FolderIcon } from "@/lib/static/icons";
 import Row from "./row";
+import EmptyTable from "../base/emptyTable";
 
 export default function List({documentData,count,pageSize,setPageSize,page,setPage,sort,setSort}: ListProps) {
   function getSortIcon(column: DocumentTableSortColumn): string {
@@ -74,11 +75,7 @@ export default function List({documentData,count,pageSize,setPageSize,page,setPa
               {documentData&& documentData.length > 0 ? documentData.map((doc) => (
                 <Row id={doc.id} name={doc.name} createdBy={doc.createdBy} updatedAt={doc.updatedAt} size={doc.size} type={doc.type} />
               )): 
-                <tr>
-                  <td colSpan={6} className="text-center py-4">
-                    No Data Available
-                  </td>
-                </tr>
+                <EmptyTable colspan={6}/>
               }
             </tbody>
           </table>

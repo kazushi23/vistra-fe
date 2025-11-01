@@ -108,6 +108,9 @@ export interface DocumentTableSort {
   column: DocumentTableSortColumn;
 }
 
+export interface EmptyColumnsCount {
+  colspan: number;
+}
 /*
 Home Components
 */
