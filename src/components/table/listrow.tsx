@@ -28,7 +28,7 @@ export default function ListRow({id, name, createdBy, updatedAt, size, type}: Do
             </th>
             <td className="px-6 py-4">{createdBy ?? "-"}</td>
             <td className="px-6 py-4">{GetDatetimeString(Number(updatedAt))}</td>
-            <td className="px-6 py-4">{size ? `${size / 1024} KB` : "-"}</td>
+            <td className="px-6 py-4">{size ? `${Math.ceil(size / 1024)} KB` : "-"}</td>
             <td className="px-6 py-4 cursor-pointer">
             <Image
                 src={type === "file" ? DotMenuFileIcon : DotMenuFolderIcon}

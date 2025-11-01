@@ -6,6 +6,7 @@ import { AscSelIcon, DescIcon, DescSelIcon } from "@/lib/static/icons";
 import ListRow from "./listrow";
 import EmptyTable from "../base/emptyTable";
 import ListHeader from "./listheader";
+import { useEffect } from "react";
 
 export default function List({documentData,count,pageSize,setPageSize,page,setPage,sort,setSort}: ListProps) {
   function getSortIcon(column: DocumentTableSortColumn): string {
@@ -30,16 +31,15 @@ export default function List({documentData,count,pageSize,setPageSize,page,setPa
   */
   return (
     <section>
-      <div className="relative shadow-md sm:rounded-lg my-8 overflow-x-auto">
-        <div className="max-h-[600px] overflow-y-auto">
+      <div className="relative shadow-md sm:rounded-lg my-8 overflow-x-auto bg-white">
+        <div className="h-[60vh] overflow-y-auto">
           <table className="w-full min-w-[700px] text-sm text-left rtl:text-right text-gray-500">
             <thead className="text-xs text-white bg-[#011b56] sticky top-0 z-10">
               <ListHeader getSortIcon={getSortIcon} handleSort={handleSort}/>
             </thead>
-
             <tbody>
               {documentData&& documentData.length > 0 ? documentData.map((doc) => (
-                <ListRow id={doc.id} name={doc.name} createdBy={doc.createdBy} updatedAt={doc.updatedAt} size={doc.size} type={doc.type} />
+                <ListRow key={doc.id} id={doc.id} name={doc.name} createdBy={doc.createdBy} updatedAt={doc.updatedAt} size={doc.size} type={doc.type} />
               )): 
                 <EmptyTable colspan={6}/>
               }
@@ -47,8 +47,6 @@ export default function List({documentData,count,pageSize,setPageSize,page,setPa
           </table>
         </div>
       </div>
-
-      {/* Pagination and PageSize */}
       <div className="flex justify-between mt-2">
         <PageSizeSelection pageSize={pageSize} setPageSize={setPageSize} />
         <PageSelection page={page} count={count} pageSize={pageSize} setPage={setPage} />

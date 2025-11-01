@@ -2,7 +2,7 @@ import { EmptyColumnsCountProps } from "@/lib/types";
 
 export default function EmptyTable({colspan}: EmptyColumnsCountProps) {
     return (
-        <tr>
+        <tr className="h-full">
             <td colSpan={colspan} className="text-center py-4">
             No Data Available
             </td>
