@@ -3,12 +3,12 @@ import { Dispatch, SetStateAction } from "react";
 File and Folder related types
 */
 export interface DocumentItem {
-  id: string;
+  id: number;
   name: string;
   createdBy: string;
   updatedAt: number; 
-  sizeKB?: number;
-  isFile: boolean;
+  size?: number;
+  type: "file" | "folder";
 }
 
 export interface GetDocumentResponse {
@@ -101,7 +101,7 @@ export interface SearchProps {
   setSearch: Dispatch<SetStateAction<string>>;
 }
 
-export type DocumentTableSortColumn = "Name" | "UpdatedAt";
+export type DocumentTableSortColumn = "name" | "updatedAt";
 
 export interface DocumentTableSort {
   desc: boolean;

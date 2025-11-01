@@ -43,10 +43,10 @@ export default function List({documentData,count,pageSize,setPageSize,page,setPa
                     <label className="sr-only">checkbox</label>
                   </div>
                 </th>
-                <th className="px-6 py-3 font-normal flex space-x-2 cursor-pointer" onClick={() => handleSort("Name")}>
+                <th className="px-6 py-3 font-normal flex space-x-2 cursor-pointer" onClick={() => handleSort("name")}>
                     <p>Name</p>
                     <Image
-                      src={getSortIcon("Name")}
+                      src={getSortIcon("name")}
                       alt="File Type Icon"
                       width={20}
                       height={20}
@@ -54,10 +54,10 @@ export default function List({documentData,count,pageSize,setPageSize,page,setPa
                     />
                 </th>
                 <th className="px-6 py-3 font-normal">Created by</th>
-                <th className="px-6 py-3 font-normal flex space-x-2 cursor-pointer" onClick={() => handleSort("UpdatedAt")}>
+                <th className="px-6 py-3 font-normal flex space-x-2 cursor-pointer" onClick={() => handleSort("updatedAt")}>
                   <p>Date</p>
                   <Image
-                    src={getSortIcon("UpdatedAt")}
+                    src={getSortIcon("updatedAt")}
                     alt="File Type Icon"
                     width={20}
                     height={20}
@@ -85,7 +85,7 @@ export default function List({documentData,count,pageSize,setPageSize,page,setPa
                   </td>
                   <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap flex space-x-3">
                     <Image
-                      src={doc.isFile ? FileIcon: FolderIcon}
+                      src={doc.type === "file" ? FileIcon: FolderIcon}
                       alt="File Type Icon"
                       width={20}
                       height={20}
@@ -94,11 +94,11 @@ export default function List({documentData,count,pageSize,setPageSize,page,setPa
                     <p>{doc.name ?? "-"}</p>
                   </th>
                   <td className="px-6 py-4">{doc.createdBy ?? "-"}</td>
-                  <td className="px-6 py-4">{GetDatetimeString(doc.updatedAt)}</td>
-                  <td className="px-6 py-4">{doc.sizeKB ? `${doc.sizeKB} KB` : "-"}</td>
+                  <td className="px-6 py-4">{GetDatetimeString(Number(doc.updatedAt))}</td>
+                  <td className="px-6 py-4">{doc.size ? `${doc.size / 1024} KB` : "-"}</td>
                   <td className="px-6 py-4 cursor-pointer">
                     <Image
-                      src={doc.isFile ? DotMenuFileIcon : DotMenuFolderIcon}
+                      src={doc.type === "file" ? DotMenuFileIcon : DotMenuFolderIcon}
                       alt="Menu Icon"
                       width={12}
                       height={12}

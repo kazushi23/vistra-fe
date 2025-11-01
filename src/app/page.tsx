@@ -1,6 +1,6 @@
 'use client';
 
-import { getDocumentsMock } from "@/lib/api/document";
+import { getDocuments } from "@/lib/api/document";
 import Heading from "../components/home/heading"
 import List from "../components/table/list";
 import {useEffect, useState} from "react"
@@ -18,13 +18,13 @@ export default function Home() {
   const [search, setSearch] = useState<string>("")
   const [sort, setSort] = useState<DocumentTableSort>({
     desc: true,
-    column: "UpdatedAt",
+    column: "updatedAt",
   })
   const {showToast} = useToast();
 
   async function fetchDocuments() {
     try {
-      const res: GetDocumentResponse = await getDocumentsMock(pageSize, page, search, sort.desc, sort.column)
+      const res: GetDocumentResponse = await getDocuments(pageSize, page, search, sort.desc, sort.column)
       setDocuments(res.data)
       setDocumentsCount(res.count)
     } catch(error) {
