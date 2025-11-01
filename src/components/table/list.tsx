@@ -70,7 +70,7 @@ export default function List({documentData,count,pageSize,setPageSize,page,setPa
             </thead>
 
             <tbody>
-              {documentData.map((doc) => (
+              {documentData&& documentData.length > 0 ? documentData.map((doc) => (
                 <tr
                   key={doc.id}
                   className="bg-white border-b border-gray-200 hover:bg-gray-50 cursor-pointer"
@@ -106,7 +106,13 @@ export default function List({documentData,count,pageSize,setPageSize,page,setPa
                     />
                   </td>
                 </tr>
-              ))}
+              )): 
+                <tr>
+                  <td colSpan={6} className="text-center py-4">
+                    No Data Available
+                  </td>
+                </tr>
+              }
             </tbody>
           </table>
         </div>
