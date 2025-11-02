@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ButtonProps } from "@/lib/types";
+import { ButtonProps } from "@/lib/types/home.types";
 
 
 export default function Button({variant = "primary", label, iconSrc, iconAlt, onClick}: ButtonProps) {

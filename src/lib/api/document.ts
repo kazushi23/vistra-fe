@@ -1,6 +1,7 @@
 import { documentMock } from "../mocks/document";
-import { CreateFilesResponse, CreateFolderResponse, DocumentItem, DocumentTableSortColumn, FileMetaData, GetDocumentResponse } from "../types";
-
+import { CreateFilesResponse, CreateFolderResponse } from "../types/document.types";
+import { DocumentTableSortColumn } from "../types/table.types";
+import { FileMetaData, GetDocumentResponse } from "../types/document.types";
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export async function getDocuments(pageSize: number, page: number, search: string, desc: boolean, column: DocumentTableSortColumn): Promise<GetDocumentResponse> {

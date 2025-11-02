@@ -1,5 +1,5 @@
 import { documentMock } from "../mocks/document";
-import { CreateFilesResponse, CreateFolderResponse, DocumentItem, DocumentTableSortColumn, FileMetaData, GetDocumentResponse } from "../types";
+import { CreateFilesResponse, CreateFolderResponse, DocumentItem, DocumentTableSortColumn, FileMetaData, GetDocumentResponse } from "../types/home.types";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 

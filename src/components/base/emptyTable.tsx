@@ -1,5 +1,5 @@
 import { Dataicon } from "@/lib/static/icons";
-import { EmptyColumnsCountProps } from "@/lib/types";
+import { EmptyColumnsCountProps } from "@/lib/types/home.types";
 import Image from "next/image";
 
 export default function EmptyTable({colspan}: EmptyColumnsCountProps) {

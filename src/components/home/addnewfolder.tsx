@@ -1,9 +1,9 @@
-import { CreateFolderResponse } from "@/lib/types"
+import { CreateFolderResponse } from "@/lib/types/home.types"
 import Button from "../base/button"
 import { useState } from "react"
 import { createFolder } from "@/lib/api/document"
 import { useToast } from "../base/toast"
-import { FolderProps } from "@/lib/types"
+import { FolderProps } from "@/lib/types/home.types"
 import { plusIcon } from "@/lib/static/icons"
 
 export default function AddNewFolder({onFolderCreated}: FolderProps) {

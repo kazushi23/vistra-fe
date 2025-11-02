@@ -1,11 +1,11 @@
 import Button from "../base/button";
 import { useState } from "react";
 import FilePreview from "./filepreview";
-import { CreateFilesResponse, FileMetaData } from "@/lib/types";
+import { CreateFilesResponse, FileMetaData } from "@/lib/types/home.types";
 import { createFiles } from "@/lib/api/document";
 import { MAX_FILE_SIZE_MB, ALLOWED_TYPES } from "@/lib/static/filefolderoptions";
 import { useToast } from "../base/toast";
-import { FileProps } from "@/lib/types";
+import { FileProps } from "@/lib/types/home.types";
 import { UploadIcon } from "@/lib/static/icons";
 
 export default function UploadFiles({onFileCreated}: FileProps) {

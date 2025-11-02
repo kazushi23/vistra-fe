@@ -1,5 +1,5 @@
 'use client'
-import { ToastProps, ToastContextType, ToastType } from "@/lib/types"
+import { ToastProps, ToastContextType, ToastType } from "@/lib/types/home.types"
 import { useState, createContext, useContext, ReactNode } from "react"
 
 const ToastContext = createContext<ToastContextType | undefined>(undefined);

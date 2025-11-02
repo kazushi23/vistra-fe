@@ -1,4 +1,4 @@
-import type { DocumentItem } from "../types";
+import type { DocumentItem } from "../types/home.types";
 
 export const documentMock: DocumentItem[] = [
   { id: "folder-1", name: "Projects", createdBy: "Alice", updatedAt: 1709145600000, isFile: false },

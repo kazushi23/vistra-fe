@@ -2,7 +2,7 @@ import SearchBox from "../home/searchbox";
 import Button from "../base/button";
 import AddNewFolder from "./addnewfolder";
 import UploadFiles from "./uploadfilemodal";
-import { HeadingProps } from "@/lib/types";
+import { HeadingProps } from "@/lib/types/home.types";
 
 export default function Heading({onFileFolderCreated, search, setSearch}: HeadingProps) {
   return (

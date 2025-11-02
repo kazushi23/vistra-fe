@@ -4,9 +4,9 @@ import { getDocuments } from "@/lib/api/document";
 import Heading from "../components/home/heading"
 import List from "../components/table/list";
 import {useEffect, useState} from "react"
-import { DocumentItem, GetDocumentResponse } from "@/lib/types";
+import { DocumentItem, GetDocumentResponse } from "@/lib/types/document.types";
 import { pageSizes } from "@/lib/static/pagesizesoptions";
-import { DocumentTableSort } from "@/lib/types";
+import { DocumentTableSort } from "@/lib/types/table.types";
 import { useToast } from "@/components/base/toast";
 
 export default function Home() {

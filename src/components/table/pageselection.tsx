@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Dispatch, SetStateAction } from "react";
 import Image from "next/image";
-import { PageProps } from "@/lib/types";
+import { PageProps } from "@/lib/types/home.types";
 import { LeftArrowDisabledIcon, LeftArrowIcon, RightArrowDisabledIcon, RightArrowIcon } from "@/lib/static/icons";
 
 

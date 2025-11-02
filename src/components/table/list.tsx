@@ -1,7 +1,7 @@
-import { DocumentTableSortColumn } from "@/lib/types";
+import { DocumentTableSortColumn } from "@/lib/types/home.types";
 import PageSizeSelection from "../table/pagesizeselection";
 import PageSelection from "../table/pageselection";
-import { ListProps } from "@/lib/types";
+import { ListProps } from "@/lib/types/home.types";
 import { AscSelIcon, DescIcon, DescSelIcon } from "@/lib/static/icons";
 import ListRow from "./listrow";
 import EmptyTable from "../base/emptyTable";

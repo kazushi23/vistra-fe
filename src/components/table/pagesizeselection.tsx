@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 import { useState } from "react";
 import PageSizeDropdown from "./pagesizedropdown";
-import { PageSizeProps } from "@/lib/types";
+import { PageSizeProps } from "@/lib/types/home.types";
 import { DownIcon } from "@/lib/static/icons";
 
 

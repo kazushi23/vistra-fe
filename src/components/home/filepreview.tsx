@@ -1,4 +1,4 @@
-import { FilePreviewProps } from "@/lib/types"
+import { FilePreviewProps } from "@/lib/types/home.types"
 import Image from "next/image"
 
 export default function FilePreview({files}: FilePreviewProps) {

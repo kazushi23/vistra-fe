@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { SearchProps } from "@/lib/types";
+import { SearchProps } from "@/lib/types/home.types";
 import { SearchIcon } from "@/lib/static/icons";
 
 export default function SearchBox({search, setSearch}: SearchProps) {

@@ -1,4 +1,4 @@
-import { DocumentItem } from "@/lib/types";
+import { DocumentItem } from "@/lib/types/home.types";
 import Image from "next/image";
 import { FileIcon, FolderIcon, DotMenuFileIcon, DotMenuFolderIcon } from "@/lib/static/icons";
 import { GetDatetimeString } from "@/utils/date";

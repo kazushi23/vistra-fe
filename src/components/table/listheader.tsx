@@ -1,4 +1,4 @@
-import { ListHeaderProps } from "@/lib/types"
+import { ListHeaderProps } from "@/lib/types/home.types"
 import Image from "next/image"
 
 export default function ListHeader({getSortIcon, handleSort}: ListHeaderProps) {
