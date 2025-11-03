@@ -3,7 +3,7 @@ import { useState } from "react";
 import FilePreview from "./filepreview";
 import { CreateFilesResponse, FileMetaData } from "@/lib/types/document.types";
 import { createFiles } from "@/lib/api/document";
-import { MAX_FILE_SIZE_MB, ALLOWED_TYPES } from "@/lib/static/filefolderoptions";
+import { MAX_FILE_SIZE_MB, ALLOWED_TYPES, ALLOWED_FILE_LENGTH } from "@/lib/static/filefolderoptions";
 import { useToast } from "../base/toast";
 import { FileProps } from "@/lib/types/home.types";
 import { UploadIcon } from "@/lib/static/icons";
@@ -15,6 +15,10 @@ export default function UploadFiles({onFileCreated}: FileProps) {
     const {showToast} = useToast();
 
     const handleFiles = (selectedFiles: FileList | File[]) => {
+        if (selectedFiles.length > ALLOWED_FILE_LENGTH) {
+            setError("Maximum of 10 files allowed.");
+            return;
+        }
         const fileArray = Array.from(selectedFiles);
         const metaDataArray: FileMetaData[] = []
 
@@ -52,8 +56,8 @@ export default function UploadFiles({onFileCreated}: FileProps) {
             setError("");
             onFileCreated()
             showToast("Success", "Files created successfully")
-        } catch (error: any) {
-            showToast("Error", "Something went wrong, please try again.")
+        } catch(error: any) {
+            showToast("Error", JSON.parse(error?.message).message || "Something went wrong, please try again.")
         }
     };
 

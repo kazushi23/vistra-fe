@@ -1,5 +1,5 @@
 'use client'
-import { ToastProps, ToastContextType, ToastType } from "@/lib/types/home.types"
+import { ToastProps, ToastContextType, ToastType } from "@/lib/types/base.types";
 import { useState, createContext, useContext, ReactNode } from "react"
 
 const ToastContext = createContext<ToastContextType | undefined>(undefined);
@@ -8,12 +8,14 @@ export default function ToastProvider({ children }: { children: ReactNode }) {
     const [toasts, setToasts] = useState<ToastProps[]>([]);
     
     const showToast = (toastType: ToastType, message: string) => {
+        console.log(message)
         const id: number = Date.now();
         setToasts((prev) => [...prev, { id, toastType, message }]);
         setTimeout(() => {
             setToasts((prev) => prev.filter((toast) => toast.id !== id));
         }, 3000);
     };
+
     return (
         <ToastContext.Provider value={{ showToast }}>
         {children}

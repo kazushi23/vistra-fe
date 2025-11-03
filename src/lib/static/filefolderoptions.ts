@@ -22,3 +22,4 @@ export const ALLOWED_TYPES = [
   "application/zip",
   "application/x-7z-compressed",
 ];
+export const ALLOWED_FILE_LENGTH = 10;

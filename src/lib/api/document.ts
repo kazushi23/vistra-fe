@@ -27,7 +27,7 @@ export async function getDocuments(pageSize: number, page: number, search: strin
 }
 
 export async function createFolder(folderName: string): Promise<CreateFolderResponse> {
-  const res = await fetch(`${BASE_URL}/api/v1/document/create/folder`, {
+  const res = await fetch(`${BASE_URL}/api/v1/folder/create`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -47,7 +47,7 @@ export async function createFiles(files: File[]): Promise<CreateFilesResponse> {
   const formData = new FormData();
   files.forEach((file: File) => formData.append("files", file));
 
-  const res = await fetch(`${BASE_URL}/api/v1/document/create/file`, {
+  const res = await fetch(`${BASE_URL}/api/v1/file/create`, {
     method: "POST",
     body: formData, // no JSON.stringify, FormData handles content type automatically
   });

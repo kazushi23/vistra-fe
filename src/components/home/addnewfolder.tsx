@@ -1,10 +1,11 @@
-import { CreateFolderResponse } from "@/lib/types/home.types"
+import { CreateFolderResponse } from "@/lib/types/document.types"
 import Button from "../base/button"
 import { useState } from "react"
 import { createFolder } from "@/lib/api/document"
 import { useToast } from "../base/toast"
 import { FolderProps } from "@/lib/types/home.types"
 import { plusIcon } from "@/lib/static/icons"
+import Error from "next/error"
 
 export default function AddNewFolder({onFolderCreated}: FolderProps) {
     const [openAddNewFolder, setOpenAddNewFolder] = useState<boolean>(false)
@@ -22,7 +23,7 @@ export default function AddNewFolder({onFolderCreated}: FolderProps) {
             onFolderCreated()
             showToast("Success", "Folder created successfully")
         } catch(error: any) {
-            showToast("Error", "Something went wrong, please try again")
+            showToast("Error", JSON.parse(error?.message).message || "Something went wrong, please try again.")
         }
     }
 
