@@ -1,5 +1,6 @@
 import { documentMock } from "../mocks/document";
-import { CreateFilesResponse, CreateFolderResponse, DocumentItem, DocumentTableSortColumn, FileMetaData, GetDocumentResponse } from "../types/home.types";
+import { CreateFilesResponse, CreateFolderResponse, DocumentItem, GetDocumentResponse } from "../types/document.types";
+import { DocumentTableSortColumn } from "../types/table.types";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -29,6 +30,8 @@ export async function getDocumentsMock(pageSize: number, page: number, search: s
       const endIndex: number = startIndex + pageSize;
 
       const res: GetDocumentResponse = {
+        type: "Success",
+        message: "Document created",
         data: filtered.slice(startIndex,endIndex),
         count: count
       }

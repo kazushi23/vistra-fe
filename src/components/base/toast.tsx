@@ -8,7 +8,6 @@ export default function ToastProvider({ children }: { children: ReactNode }) {
     const [toasts, setToasts] = useState<ToastProps[]>([]);
     
     const showToast = (toastType: ToastType, message: string) => {
-        console.log(message)
         const id: number = Date.now();
         setToasts((prev) => [...prev, { id, toastType, message }]);
         setTimeout(() => {

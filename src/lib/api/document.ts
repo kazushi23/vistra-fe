@@ -43,6 +43,18 @@ export async function createFolder(folderName: string): Promise<CreateFolderResp
   return data;
 }
 
+export async function createFolderSimultaneously(folderName: string) {
+  const promises = [1, 2, 3].map(() => createFolder(folderName));
+  try {
+    const results = await Promise.all(promises);
+    console.log("All folders created:", results);
+    return results;
+  } catch (err) {
+    console.error("Error creating folders:", err);
+    throw err;
+  }
+}
+
 export async function createFiles(files: File[]): Promise<CreateFilesResponse> {
   const formData = new FormData();
   files.forEach((file: File) => formData.append("files", file));
@@ -59,4 +71,16 @@ export async function createFiles(files: File[]): Promise<CreateFilesResponse> {
 
   const data: CreateFilesResponse = await res.json();
   return data;
+}
+
+export async function uploadFilesSimultaneously(files: File[]) {
+  const promises = [1, 2, 3, 4, 5, 6, 7, 8].map(() => createFiles(files));
+  try {
+    const results = await Promise.all(promises);
+    console.log("All uploads completed:", results);
+    return results;
+  } catch (err) {
+    console.error("Error uploading files:", err);
+    throw err;
+  }
 }

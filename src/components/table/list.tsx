@@ -47,7 +47,7 @@ export default function List({documentData,count,pageSize,setPageSize,page,setPa
           </table>
         </div>
       </div>
-      <div className="flex justify-between mt-2">
+      <div className="flex flex-col sm:flex-row sm:justify-between items-center w-full max-w-md mx-auto gap-2 sm:gap-0 mt-2">
         <PageSizeSelection pageSize={pageSize} setPageSize={setPageSize} />
         <PageSelection page={page} count={count} pageSize={pageSize} setPage={setPage} />
       </div>

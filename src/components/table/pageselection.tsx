@@ -24,7 +24,6 @@ export default function PageSelection({page, count, pageSize, setPage}: PageProp
     }
 
     function nextPage() {
-        console.log(totPages, page)
         if (page === totPages) {
             return
         }
