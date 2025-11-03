@@ -1,31 +1,34 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import { Dispatch, SetStateAction } from "react";
 import Image from "next/image";
-import { PageProps } from "@/lib/types/home.types";
+import { PageProps } from "@/lib/types/table.types";
 import { LeftArrowDisabledIcon, LeftArrowIcon, RightArrowDisabledIcon, RightArrowIcon } from "@/lib/static/icons";
 
 
 export default function PageSelection({page, count, pageSize, setPage}: PageProps) {
-    const [totPages, setTotPages] = useState<number>(0)
+    const [totPages, setTotPages] = useState<number>(1)
 
     useEffect(() => {
-        setTotPages(Math.ceil(count/pageSize))
+        const pages: number = Math.ceil(count/pageSize)
+        if (pages > 0) {
+            setTotPages(pages)
+        }
     }, [pageSize, count])
 
     function prevPage() {
         if (page === 1) {
             return
         }
-        setPage(prev => prev - 1)
+        setPage((prev: number) => prev - 1)
     }
 
     function nextPage() {
+        console.log(totPages, page)
         if (page === totPages) {
             return
         }
-        setPage(prev => prev + 1)
+        setPage((prev: number) => prev + 1)
     }
 
     return (
