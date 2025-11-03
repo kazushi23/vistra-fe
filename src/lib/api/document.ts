@@ -1,5 +1,5 @@
 import { documentMock } from "../mocks/document";
-import { CreateFilesResponse, CreateFolderResponse } from "../types/document.types";
+import { CreateFilesResponse, CreateFolderResponse, FileDataProps } from "../types/document.types";
 import { DocumentTableSortColumn } from "../types/table.types";
 import { FileMetaData, GetDocumentResponse } from "../types/document.types";
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -43,17 +43,18 @@ export async function createFolder(folderName: string): Promise<CreateFolderResp
   return data;
 }
 
-export async function createFiles(files: FileMetaData[]): Promise<CreateFilesResponse> {
+export async function createFiles(files: File[]): Promise<CreateFilesResponse> {
+  const formData = new FormData();
+  files.forEach((file: File) => formData.append("files", file));
+
   const res = await fetch(`${BASE_URL}/api/v1/document/create/file`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ files: files }),
+    body: formData, // no JSON.stringify, FormData handles content type automatically
   });
+
   if (!res.ok) {
     const text = await res.text();
-    throw new Error(text || "Failed to create file");
+    throw new Error(text || "Failed to upload files");
   }
 
   const data: CreateFilesResponse = await res.json();

@@ -1,7 +1,7 @@
 import Button from "../base/button";
 import { useState } from "react";
 import FilePreview from "./filepreview";
-import { CreateFilesResponse, FileMetaData } from "@/lib/types/home.types";
+import { CreateFilesResponse, FileMetaData } from "@/lib/types/document.types";
 import { createFiles } from "@/lib/api/document";
 import { MAX_FILE_SIZE_MB, ALLOWED_TYPES } from "@/lib/static/filefolderoptions";
 import { useToast } from "../base/toast";
@@ -11,7 +11,6 @@ import { UploadIcon } from "@/lib/static/icons";
 export default function UploadFiles({onFileCreated}: FileProps) {
     const [openUploadFiles, setOpenUploadFiles] = useState<boolean>(false);
     const [files, setFiles] = useState<File[]>([]);
-    const [fileMetaDatas, setFileMetaDatas] = useState<FileMetaData[]>([])
     const [error, setError] = useState<string>("");
     const {showToast} = useToast();
 
@@ -33,7 +32,6 @@ export default function UploadFiles({onFileCreated}: FileProps) {
 
         // Append new files to existing ones
         setFiles((prev) => [...prev, ...fileArray]);
-        setFileMetaDatas((prev) => [...prev, ...metaDataArray]);
         setError("");
     };
 
@@ -48,7 +46,7 @@ export default function UploadFiles({onFileCreated}: FileProps) {
             return;
         }
         try {
-            const res: CreateFilesResponse = await createFiles(fileMetaDatas)
+            const res: CreateFilesResponse = await createFiles(files)
             setFiles([]);
             setOpenUploadFiles(false);
             setError("");

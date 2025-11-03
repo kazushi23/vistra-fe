@@ -1,7 +1,7 @@
-import { FilePreviewProps } from "@/lib/types/home.types"
+import type { FileDataProps } from "@/lib/types/document.types"
 import Image from "next/image"
 
-export default function FilePreview({files}: FilePreviewProps) {
+export default function FilePreview({files}: FileDataProps) {
     return (
         <div>
             {files.length > 0 && (

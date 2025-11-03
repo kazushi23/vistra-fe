@@ -1,9 +1,11 @@
-import { DocumentItem } from "@/lib/types/home.types";
+import { DocumentItem } from "@/lib/types/document.types";
 import Image from "next/image";
 import { FileIcon, FolderIcon, DotMenuFileIcon, DotMenuFolderIcon } from "@/lib/static/icons";
 import { GetDatetimeString } from "@/utils/date";
+import { formatFileSize } from "@/utils/filesize";
 
 export default function ListRow({id, name, createdBy, updatedAt, size, type}: DocumentItem) {
+    
     return (
         <tr key={id}
             className="bg-white border-b border-gray-200 hover:bg-gray-50 cursor-pointer"
@@ -28,7 +30,7 @@ export default function ListRow({id, name, createdBy, updatedAt, size, type}: Do
             </th>
             <td className="px-6 py-4">{createdBy ?? "-"}</td>
             <td className="px-6 py-4">{GetDatetimeString(Number(updatedAt))}</td>
-            <td className="px-6 py-4">{size ? `${Math.ceil(size / 1024)} KB` : "-"}</td>
+            <td className="px-6 py-4">{formatFileSize(size)}</td>
             <td className="px-6 py-4 cursor-pointer">
             <Image
                 src={type === "file" ? DotMenuFileIcon : DotMenuFolderIcon}

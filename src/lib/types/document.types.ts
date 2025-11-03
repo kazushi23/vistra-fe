@@ -25,7 +25,7 @@ export interface CreateFilesResponse {
   message: string;
   data: DocumentItem[];
 }
-export interface FilePreviewProps {
+export interface FileDataProps {
     files: File[];
 }
 
