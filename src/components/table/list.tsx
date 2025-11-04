@@ -1,3 +1,5 @@
+'use client';
+
 import { DocumentTableSortColumn } from "@/lib/types/table.types";
 import PageSizeSelection from "../table/pagesizeselection";
 import PageSelection from "../table/pageselection";

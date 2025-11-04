@@ -11,6 +11,7 @@ table height will jump -- DONE
 selection (single and all)
 responsive table -- DONE
 loading icon for table data
+error message between frontend and backend
 
 Reasonings:
 send over file metadata {name, size} instead of files as we are mimicing file upload

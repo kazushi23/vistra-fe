@@ -1,3 +1,5 @@
+'use client';
+
 import { CreateFolderResponse } from "@/lib/types/document.types"
 import Button from "../base/button"
 import { useState } from "react"

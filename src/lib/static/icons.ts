@@ -14,5 +14,5 @@ export const LeftArrowIcon: string = "left-arrow-icon.svg" // pagination left ar
 export const RightArrowDisabledIcon: string = "right-arrow-disabled-icon.svg" // pagination right arrow disabled
 export const RightArrowIcon: string = "right-arrow-icon.svg" // pagination right arrow
 export const SearchIcon: string = "search-icon.svg" // search box icon
-export const UpIcon: string = "up-icon.svg" // not in use
+export const UpIcon: string = "up-icon.svg" // arrow up for page size dropdown
 export const UploadIcon: string = "upload-icon.svg" // file upload button icon

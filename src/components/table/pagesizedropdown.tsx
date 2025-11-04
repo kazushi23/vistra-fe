@@ -1,4 +1,5 @@
-import { Dispatch, SetStateAction } from "react";
+'use client';
+
 import { pageSizes } from "@/lib/static/pagesizesoptions";
 import { useRef, useEffect, useState } from "react";
 import { PageSizeDropdownProps } from "@/lib/types/table.types";

@@ -1,7 +1,9 @@
+'use client';
+
 import Button from "../base/button";
 import { useState } from "react";
 import FilePreview from "./filepreview";
-import { CreateFilesResponse, FileMetaData } from "@/lib/types/document.types";
+import { CreateFilesResponse } from "@/lib/types/document.types";
 import { createFiles } from "@/lib/api/document";
 import { MAX_FILE_SIZE_MB, ALLOWED_TYPES, ALLOWED_FILE_LENGTH } from "@/lib/static/filefolderoptions";
 import { useToast } from "../base/toast";

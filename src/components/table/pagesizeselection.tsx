@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useState } from "react";
 import PageSizeDropdown from "./pagesizedropdown";
 import { PageSizeProps } from "@/lib/types/table.types";
-import { DownIcon } from "@/lib/static/icons";
+import { DownIcon, UpIcon } from "@/lib/static/icons";
 
 // child component for page selection
 // wraps dropdown child component
@@ -22,7 +22,7 @@ export default function PageSizeSelection({pageSize, setPageSize}: PageSizeProps
                     className="flex-1 w-8 bg-transparent outline-none text-black placeholder-gray-400 text-sm"
                 />
                 <Image
-                    src={DownIcon}
+                    src={openSelection ? UpIcon :DownIcon}
                     alt="Down Icon"
                     width={8}
                     height={8}
