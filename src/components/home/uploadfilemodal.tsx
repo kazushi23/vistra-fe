@@ -61,7 +61,7 @@ export default function UploadFiles({onFileCreated}: FileProps) {
             showToast("Success", "Files created successfully") //success message
         } catch(error: any) {
             // display server error message else default message
-            showToast("Error", JSON.parse(error?.message).message || "Something went wrong, please try again.")
+            showToast("Error", error.message || "Something went wrong, please try again.")
         }
     };
     // on click of cancel button
@@ -80,7 +80,7 @@ export default function UploadFiles({onFileCreated}: FileProps) {
     };
 
   return (
-    <div>
+    <div data-testid="file-modal">
         <Button variant="secondary" label="Upload files" iconSrc={UploadIcon} iconAlt="Upload Icon" onClick={() => setOpenUploadFiles(true)}/>
 
         {openUploadFiles && ( // when openUploadFiles, show modal

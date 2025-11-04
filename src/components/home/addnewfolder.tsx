@@ -18,6 +18,10 @@ export default function AddNewFolder({onFolderCreated}: FolderProps) {
         setOpenAddNewFolder(true) // show the modal
     }
     async function handleCreate() { // create folder (api call)
+        if (folderName === "") {
+            showToast("Error", "Folder name is required");
+            return;
+        }
         try {
             const res: CreateFolderResponse = await createFolder(folderName)
             setFolderName("") // empty out folder name in state
@@ -26,12 +30,12 @@ export default function AddNewFolder({onFolderCreated}: FolderProps) {
             showToast("Success", "Folder created successfully") // success message
         } catch(error: any) {
             // display server error message else default message
-            showToast("Error", JSON.parse(error?.message).message || "Something went wrong, please try again.")
+            showToast("Error", error.message || "Something went wrong, please try again.")
         }
     }
 
     return (
-        <div>
+        <div data-testid="folder-modal">
             <Button variant="primary" label="Add new folder" iconSrc={plusIcon} iconAlt="Add Icon" onClick={openModal}/>
             {openAddNewFolder && ( // show when openAddNewFolder
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">

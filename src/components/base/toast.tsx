@@ -10,8 +10,17 @@ export default function ToastProvider({ children }: { children: ReactNode }) {
     const [toasts, setToasts] = useState<ToastProps[]>([]); // hold all active toast
     // display and remove after 3 seconds
     const showToast = (toastType: ToastType, message: string) => {
+        let displayMessage = message;
+        // Try to unpack JSON if message is a JSON string
+        try {
+            const parsed = typeof message === "string" ? JSON.parse(message) : null;
+            if (parsed?.message) displayMessage = parsed.message;
+        } catch {
+            // fallback to original message if not JSON
+        }
+
         const id: number = Date.now();
-        setToasts((prev) => [...prev, { id, toastType, message }]);
+        setToasts((prev) => [...prev, { id, toastType, message: displayMessage }]);
         setTimeout(() => {
             setToasts((prev) => prev.filter((toast) => toast.id !== id));
         }, 3000);

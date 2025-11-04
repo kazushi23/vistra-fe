@@ -31,7 +31,7 @@ export default function Home() {
       setDocumentsCount(res.count) // set all records count to state
     } catch(error: any) {
       // display error message from server, else default message
-        showToast("Error", JSON.parse(error?.message).message || "Something went wrong, please try again.")
+      showToast("Error", error.message || "Something went wrong, please try again.")
     } finally {
       setLoading(false)
     }

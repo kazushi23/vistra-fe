@@ -1,7 +1,12 @@
+# RUN DEV ENV
 npm i
 npm run dev
 open http://localhost:3000
+# COMPILE
+npm run build
 
+# RUN PROD ENV
+npm run start
 TODO:
 validation
 typescript
@@ -13,10 +18,23 @@ responsive table -- DONE
 loading icon for table data
 error message between frontend and backend
 
-Reasonings:
-send over file metadata {name, size} instead of files as we are mimicing file upload
-do not need to actually upload files to s3
-so just save the name and size only
+need to show where this is done:
+• Implement a user interface that allows users to:
+o View a list of documents and folders
+o Add a new document
+o Add a new folder
+
+Vistra Platform Coding Assignment
+
+o (Bonus) Search across documents and folders
+
+# Test
+ PASS  test/page.test.tsx
+  DocumentsPage Component
+    ✓ renders buttons (61 ms)
+    ✓ opens folder modal when Create Folder is clicked (82 ms)
+    ✓ opens upload modal when Upload File is clicked (27 ms)
+    ✓ shows error toast when folder name is empty (48 ms)
 
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
