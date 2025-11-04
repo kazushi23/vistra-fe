@@ -1,9 +1,9 @@
-import { documentMock } from "../mocks/document";
-import { CreateFilesResponse, CreateFolderResponse, FileDataProps } from "../types/document.types";
+import { CreateFilesResponse, CreateFolderResponse } from "../types/document.types";
 import { DocumentTableSortColumn } from "../types/table.types";
-import { FileMetaData, GetDocumentResponse } from "../types/document.types";
-const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+import { GetDocumentResponse } from "../types/document.types";
+const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL; // base backend url from env variables
 
+// api call to retrieve all document to be displayed in the table
 export async function getDocuments(pageSize: number, page: number, search: string, desc: boolean, column: DocumentTableSortColumn): Promise<GetDocumentResponse> {
   const res = await fetch(`${BASE_URL}/api/v1/document?` + new URLSearchParams({
     page: page.toString(),
@@ -25,7 +25,7 @@ export async function getDocuments(pageSize: number, page: number, search: strin
   const data: GetDocumentResponse = await res.json();
   return data;
 }
-
+// api call to create folder
 export async function createFolder(folderName: string): Promise<CreateFolderResponse> {
   const res = await fetch(`${BASE_URL}/api/v1/folder/create`, {
     method: "POST",
@@ -43,18 +43,18 @@ export async function createFolder(folderName: string): Promise<CreateFolderResp
   return data;
 }
 
-export async function createFolderSimultaneously(folderName: string) {
-  const promises = [1, 2, 3].map(() => createFolder(folderName));
-  try {
-    const results = await Promise.all(promises);
-    console.log("All folders created:", results);
-    return results;
-  } catch (err) {
-    console.error("Error creating folders:", err);
-    throw err;
-  }
-}
-
+// export async function createFolderSimultaneously(folderName: string) {
+//   const promises = [1, 2, 3].map(() => createFolder(folderName));
+//   try {
+//     const results = await Promise.all(promises);
+//     console.log("All folders created:", results);
+//     return results;
+//   } catch (err) {
+//     console.error("Error creating folders:", err);
+//     throw err;
+//   }
+// }
+// api call to create files
 export async function createFiles(files: File[]): Promise<CreateFilesResponse> {
   const formData = new FormData();
   files.forEach((file: File) => formData.append("files", file));
@@ -73,14 +73,14 @@ export async function createFiles(files: File[]): Promise<CreateFilesResponse> {
   return data;
 }
 
-export async function uploadFilesSimultaneously(files: File[]) {
-  const promises = [1, 2, 3, 4, 5, 6, 7, 8].map(() => createFiles(files));
-  try {
-    const results = await Promise.all(promises);
-    console.log("All uploads completed:", results);
-    return results;
-  } catch (err) {
-    console.error("Error uploading files:", err);
-    throw err;
-  }
-}
+// export async function uploadFilesSimultaneously(files: File[]) {
+//   const promises = [1, 2, 3, 4, 5, 6, 7, 8].map(() => createFiles(files));
+//   try {
+//     const results = await Promise.all(promises);
+//     console.log("All uploads completed:", results);
+//     return results;
+//   } catch (err) {
+//     console.error("Error uploading files:", err);
+//     throw err;
+//   }
+// }

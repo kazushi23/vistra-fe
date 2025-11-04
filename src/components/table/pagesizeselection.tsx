@@ -1,17 +1,18 @@
 import Image from "next/image";
-import { Dispatch, SetStateAction } from "react";
 import { useState } from "react";
 import PageSizeDropdown from "./pagesizedropdown";
 import { PageSizeProps } from "@/lib/types/table.types";
 import { DownIcon } from "@/lib/static/icons";
 
-
+// child component for page selection
+// wraps dropdown child component
 export default function PageSizeSelection({pageSize, setPageSize}: PageSizeProps) {
-        const [openSelection, setOpenSelection] = useState<boolean>(false)
+    const [openSelection, setOpenSelection] = useState<boolean>(false) // show hide the dropdown
     
     return (
         <div className="relative flex items-center space-x-4">
             <p className="text-gray-500">Show</p>
+            {/* show hide on click */}
             <div onClick={() => setOpenSelection(!openSelection)} className="bg-white w-14 px-2 py-1 rounded-lg border border-gray-200 flex items-center cursor-pointer">
                 <input
                     id="page-size"
@@ -29,8 +30,8 @@ export default function PageSizeSelection({pageSize, setPageSize}: PageSizeProps
                     className="text-(--color-primary)"
                 />
             </div>
-            {openSelection && (
-            <PageSizeDropdown pageSize={pageSize} setPageSize={setPageSize} openSelection={openSelection} setOpenSelection={setOpenSelection}/>
+            {openSelection && ( // only if openSelection then show
+                <PageSizeDropdown pageSize={pageSize} setPageSize={setPageSize} openSelection={openSelection} setOpenSelection={setOpenSelection}/>
             )}
             <p className="text-gray-500">rows per page</p>
         </div>

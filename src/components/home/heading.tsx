@@ -1,10 +1,11 @@
 import SearchBox from "../home/searchbox";
-import Button from "../base/button";
 import AddNewFolder from "./addnewfolder";
 import UploadFiles from "./uploadfilemodal";
 import { HeadingProps } from "@/lib/types/home.types";
 
+// home page top header "Documents" and 2 buttons
 export default function Heading({onFileFolderCreated, search, setSearch}: HeadingProps) {
+  // send file/folder creation function and search state to child component
   return (
     <section>
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">

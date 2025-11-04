@@ -1,6 +1,7 @@
 import type { FileDataProps } from "@/lib/types/document.types"
 import Image from "next/image"
 
+// display the uploaded file information
 export default function FilePreview({files}: FileDataProps) {
     return (
         <div>
@@ -8,7 +9,7 @@ export default function FilePreview({files}: FileDataProps) {
                 <ul className="max-h-40 overflow-y-auto mb-4 border rounded-md p-2">
                 {files.map((file, i) => (
                     <li key={i}className="flex items-center space-x-2 mb-2 border p-2 rounded-md">
-                    {file.type.startsWith("image/") ? (
+                    {file.type.startsWith("image/") ? ( // show image preview for images
                         <Image
                         src={URL.createObjectURL(file)}
                         alt={file.name}
@@ -16,9 +17,9 @@ export default function FilePreview({files}: FileDataProps) {
                         height={10}
                         className="w-10 h-10 object-cover rounded"
                         />
-                    ) : (
+                    ) : ( // else File icon
                         <div className="w-10 h-10 flex items-center justify-center bg-gray-200 rounded text-sm">
-                        PDF
+                        FILE
                         </div>
                     )}
                     <p className="text-sm text-gray-700">{file.name}</p>

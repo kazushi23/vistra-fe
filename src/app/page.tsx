@@ -9,35 +9,39 @@ import { pageSizes } from "@/lib/static/pagesizesoptions";
 import { DocumentTableSort } from "@/lib/types/table.types";
 import { useToast } from "@/components/base/toast";
 
+// Home page
 export default function Home() {
-  const [documents, setDocuments] = useState<DocumentItem[]>([])
-  const [documentCount, setDocumentsCount] = useState<number>(0)
-  const [loading, setLoading] = useState<boolean>(true)
-  const [pageSize, setPageSize] = useState<number>(pageSizes[0])
-  const [page, setPage] = useState<number>(1)
-  const [search, setSearch] = useState<string>("")
+  const [documents, setDocuments] = useState<DocumentItem[]>([]) // for display of documents in table
+  const [documentCount, setDocumentsCount] = useState<number>(0) // for pagination selection
+  const [loading, setLoading] = useState<boolean>(true) // note if data is loading for table
+  const [pageSize, setPageSize] = useState<number>(pageSizes[0]) // for selection of rows per page
+  const [page, setPage] = useState<number>(1) // note the current page
+  const [search, setSearch] = useState<string>("") // note the search string for table
   const [sort, setSort] = useState<DocumentTableSort>({
-    desc: true,
-    column: "updatedAt",
+    desc: true, // sort order
+    column: "updatedAt", // sort column
   })
-  const {showToast} = useToast();
+  const {showToast} = useToast(); // toast init
 
+  // retrieve all documents
   async function fetchDocuments() {
     try {
       const res: GetDocumentResponse = await getDocuments(pageSize, page, search, sort.desc, sort.column)
-      setDocuments(res.data)
-      setDocumentsCount(res.count)
-    } catch(error) {
-      showToast("Error", "Something went wrong, please try again.")
+      setDocuments(res.data) // set data to state
+      setDocumentsCount(res.count) // set all records count to state
+    } catch(error: any) {
+      // display error message from server, else default message
+        showToast("Error", JSON.parse(error?.message).message || "Something went wrong, please try again.")
     } finally {
       setLoading(false)
     }
   }
 
   useEffect(() => {
-    fetchDocuments()
+    fetchDocuments() // get table data when page | pagesize | sort changes
   }, [page, pageSize, sort])
 
+  // delay and search table search
   useEffect(() => {
     const handler = setTimeout(() => {
       if (search.trim() !== "") {
@@ -52,7 +56,9 @@ export default function Home() {
   return (
     <div className="min-h-screen p-8">
       <main>
+        {/* top page header */}
         <Heading onFileFolderCreated={fetchDocuments} search={search} setSearch={setSearch}/>
+        {/* table with search and pagination */}
         {!loading && <List documentData={documents} count={documentCount} pageSize={pageSize} setPageSize={setPageSize} page={page} setPage={setPage} sort={sort} setSort={setSort}/>}
         </main>
     </div>

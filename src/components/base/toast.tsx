@@ -2,11 +2,13 @@
 import { ToastProps, ToastContextType, ToastType } from "@/lib/types/base.types";
 import { useState, createContext, useContext, ReactNode } from "react"
 
+// create react context for toast notification
 const ToastContext = createContext<ToastContextType | undefined>(undefined);
 
-export default function ToastProvider({ children }: { children: ReactNode }) {
-    const [toasts, setToasts] = useState<ToastProps[]>([]);
-    
+// Wraps the entire app and provides toast that can display success, warning, or error messages for 3 seconds.
+export default function ToastProvider({ children }: { children: ReactNode }) { 
+    const [toasts, setToasts] = useState<ToastProps[]>([]); // hold all active toast
+    // display and remove after 3 seconds
     const showToast = (toastType: ToastType, message: string) => {
         const id: number = Date.now();
         setToasts((prev) => [...prev, { id, toastType, message }]);
@@ -37,7 +39,7 @@ export default function ToastProvider({ children }: { children: ReactNode }) {
         </ToastContext.Provider>
     )
 }
-
+// custom hook to access toast context
 export const useToast = (): ToastContextType => {
   const context: ToastContextType | undefined = useContext(ToastContext);
   if (!context) throw new Error("useToast must be used within a ToastProvider");

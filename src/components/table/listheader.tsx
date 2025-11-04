@@ -1,9 +1,11 @@
 import { ListHeaderProps } from "@/lib/types/table.types"
 import Image from "next/image"
 
+// child component table header th
 export default function ListHeader({getSortIcon, handleSort}: ListHeaderProps) {
     return (
         <tr>
+            {/* checkbox selection */}
             <th className="p-4 w-4">
                 <div className="flex items-center">
                 <input
@@ -13,6 +15,7 @@ export default function ListHeader({getSortIcon, handleSort}: ListHeaderProps) {
                 <label className="sr-only">checkbox</label>
                 </div>
             </th>
+            {/* name and sorting */}
             <th className="px-6 py-3 font-normal flex space-x-2 cursor-pointer" onClick={() => handleSort("name")}>
                 <p>Name</p>
                 <Image
@@ -24,6 +27,7 @@ export default function ListHeader({getSortIcon, handleSort}: ListHeaderProps) {
                 />
             </th>
             <th className="px-6 py-3 font-normal">Created by</th>
+            {/* date updated and sorting */}
             <th className="px-6 py-3 font-normal flex space-x-2 cursor-pointer" onClick={() => handleSort("updatedAt")}>
                 <p>Date</p>
                 <Image

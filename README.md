@@ -9,7 +9,8 @@ comments
 table display when data is empty -- DONE
 table height will jump -- DONE
 selection (single and all)
-responsive table
+responsive table -- DONE
+loading icon for table data
 
 Reasonings:
 send over file metadata {name, size} instead of files as we are mimicing file upload

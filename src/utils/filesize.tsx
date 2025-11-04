@@ -1,3 +1,4 @@
+// take size of file in bytes and convert to b/kb/mb based on size
 export function formatFileSize(size?: number): string {
   if (!size) return "-";
 

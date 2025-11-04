@@ -1,6 +1,6 @@
 
-export const MAX_FILE_SIZE_MB = 5;
-export const ALLOWED_TYPES = [
+export const MAX_FILE_SIZE_MB = 5; // maximum allowable file size
+export const ALLOWED_TYPES = [ // all allowable file types
   // Documents
   "application/pdf",
   "application/msword",
@@ -22,4 +22,4 @@ export const ALLOWED_TYPES = [
   "application/zip",
   "application/x-7z-compressed",
 ];
-export const ALLOWED_FILE_LENGTH = 10;
+export const ALLOWED_FILE_LENGTH = 10; // maximum allowable file length

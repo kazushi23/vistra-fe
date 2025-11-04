@@ -4,12 +4,13 @@ import { FileIcon, FolderIcon, DotMenuFileIcon, DotMenuFolderIcon } from "@/lib/
 import { GetDatetimeString } from "@/utils/date";
 import { formatFileSize } from "@/utils/filesize";
 
+// child component to display rows from parsed data
 export default function ListRow({id, name, createdBy, updatedAt, size, type}: DocumentItem) {
-    
     return (
         <tr key={id}
             className="bg-white border-b border-gray-200 hover:bg-gray-50 cursor-pointer"
         >
+            {/* checkbox for selection */}
             <td className="w-4 p-4">
             <div className="flex items-center">
                 <input
@@ -18,6 +19,7 @@ export default function ListRow({id, name, createdBy, updatedAt, size, type}: Do
                 />
             </div>
             </td>
+            {/* display file or folder icon based on type */}
             <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap flex space-x-3">
             <Image
                 src={type === "file" ? FileIcon: FolderIcon}
@@ -29,7 +31,9 @@ export default function ListRow({id, name, createdBy, updatedAt, size, type}: Do
             <p>{name ?? "-"}</p>
             </th>
             <td className="px-6 py-4">{createdBy ?? "-"}</td>
+            {/* convert unixmilli to local date string */}
             <td className="px-6 py-4">{GetDatetimeString(Number(updatedAt))}</td>
+            {/* display file size as bytes, kb, mb based on file size */}
             <td className="px-6 py-4">{formatFileSize(size)}</td>
             <td className="px-6 py-4 cursor-pointer">
             <Image
