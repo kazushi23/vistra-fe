@@ -68,6 +68,7 @@ npm run test:watch
 - **Sorting**: Implementation mainly in src/components/table/list.tsx. Sort by name or updatedAt
 - **Responsive Design**: Mobile-friendly interface using Tailwind CSS
 - **Toast Notifications**: User feedback for success/error states
+- **Loading Overlay**: Loading Overlay when data is loading. Can test with chrome inspect and use 3G option to simulate slow network
 
 ### File Upload Validation
 - **Allowed Types**: PDF, DOCX, XLSX, PNG, JPG, JPEG
@@ -91,9 +92,10 @@ gep-fe/
 │   └── globals.css           # Global styles
 ├── components/
 │   └── base/
-│       ├── button.tsx        # Base button component
-│       ├── emptyTable.tsx    # Data table when empty data component
-│       └── toast.tsx         # Notification component
+│       ├── button.tsx            # Base button component
+│       ├── emptyTable.tsx        # Data table when empty data component
+│       ├── loadingOverlay.tsx    # Overlay when data is loading
+│       └── toast.tsx             # Notification component
 │   └── home/
 │       ├── addnewfolder.tsx      # Modal to add new folder
 │       ├── filepreview.tsx       # Div to show uploaded files
