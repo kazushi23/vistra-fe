@@ -14,18 +14,30 @@ A modern Next.js TypeScript frontend for managing documents (folders and files) 
 ```bash
 # Install dependencies
 npm install
+
+# Set up environment variables depending on environment
+cp .env.example .env.development
+cp .env.example .env.production
+# Edit .env with your database credentials
+```
+
+```bash
+# Install dependencies
+npm install
 ```
 
 ### Running the Application
 
 #### Development Mode
 ```bash
+# ensure .env.development has been created (reference above)
 npm run dev
 ```
 Application runs on `http://localhost:3000` with hot-reload enabled.
 
 #### Production Mode
 ```bash
+# ensure .env.production has been created (reference above)
 # Build optimized production bundle
 npm run build
 
@@ -35,6 +47,7 @@ npm run start
 
 #### Testing
 ```bash
+# ensure .env.test has been created (reference above)
 # Run all tests
 npm run test
 

@@ -8,6 +8,7 @@ import { DocumentItem, GetDocumentResponse } from "@/lib/types/document.types";
 import { pageSizes } from "@/lib/static/pagesizesoptions";
 import { DocumentTableSort } from "@/lib/types/table.types";
 import { useToast } from "@/components/base/toast";
+import LoadingOverlay from "@/components/base/loadingOverlay";
 
 // Home page
 export default function Home() {
@@ -60,6 +61,7 @@ export default function Home() {
         <Heading onFileFolderCreated={fetchDocuments} search={search} setSearch={setSearch}/>
         {/* table with search and pagination */}
         {!loading && <List documentData={documents} count={documentCount} pageSize={pageSize} setPageSize={setPageSize} page={page} setPage={setPage} sort={sort} setSort={setSort}/>}
+        {loading && <LoadingOverlay />}
         </main>
     </div>
   );
