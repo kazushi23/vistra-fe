@@ -71,7 +71,7 @@ npm run test:watch
 - **Loading Overlay**: Loading Overlay when data is loading. Can test with chrome inspect and use 3G option to simulate slow network
 
 ### File Upload Validation
-- **Allowed Types**: PDF, DOCX, XLSX, PNG, JPG, JPEG
+- **Allowed Types**: PDF, DOC, DOCX, XLS, XLSX, TXT, CSV, RTF, PNG, JPG, JPEG, GIF, WEBP, SVG, ZIP, 7Z (can be changed based on scope)
 - **Max File Size**: 5MB per file
 - **Max Files**: 10 files per upload
 - **Empty File Detection**: Rejects 0-byte files
