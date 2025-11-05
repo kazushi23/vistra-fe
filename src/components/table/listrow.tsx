@@ -12,12 +12,13 @@ export default function ListRow({id, name, createdBy, updatedAt, size, type}: Do
         >
             {/* checkbox for selection */}
             <td className="w-4 p-4">
-            <div className="flex items-center">
-                <input
-                type="checkbox"
-                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 focus:ring-2"
-                />
-            </div>
+                <div className="flex items-center">
+                    <input
+                    type="checkbox"
+                    className="cursor-pointer w-4 h-4 appearance-none bg-white border border-gray-300 rounded-sm checked:border-[#011b56] checked:after:content-[''] checked:after:block checked:after:w-2 checked:after:h-0.5 checked:after:bg-[#011b56] checked:after:m-auto checked:after:relative checked:after:top-[6px] focus:ring-2 focus:ring-blue-500"
+                    />
+                    <label className="sr-only">checkbox</label>
+                </div>
             </td>
             {/* display file or folder icon based on type */}
             <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap flex space-x-3">
