@@ -9,6 +9,7 @@ import { pageSizes } from "@/lib/static/pagesizesoptions";
 import { DocumentTableSort } from "@/lib/types/table.types";
 import { useToast } from "@/components/base/toast";
 import LoadingOverlay from "@/components/base/loadingOverlay";
+import { fetchUsers } from "@/lib/api/user";
 
 // Home page
 export default function Home() {
@@ -27,6 +28,8 @@ export default function Home() {
   // retrieve all documents
   async function fetchDocuments() {
     try {
+      const users = await fetchUsers();
+      console.log(users)
       const res: GetDocumentResponse = await getDocuments(pageSize, page, search, sort.desc, sort.column)
       setDocuments(res.data) // set data to state
       setDocumentsCount(res.count) // set all records count to state
@@ -40,6 +43,7 @@ export default function Home() {
 
   useEffect(() => {
     fetchDocuments() // get table data when page | pagesize | sort changes
+
   }, [page, pageSize, sort])
 
   // delay and search table search
