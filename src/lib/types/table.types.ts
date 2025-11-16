@@ -41,7 +41,7 @@ export interface SearchProps {
   setSearch: Dispatch<SetStateAction<string>>; // set search input data
 }
 
-export type DocumentTableSortColumn = "name" | "updatedAt"; // allowable sort column options
+export type DocumentTableSortColumn = "id" | "email" | "name" | "updatedAt"; // allowable sort column options
 
 // state type for sorting
 export interface TableSort {

@@ -21,7 +21,7 @@ export default function ListRowUser({id, name, email, updatedAt}: UserData) {
                     <label className="sr-only">checkbox</label>
                 </div>
             </td>
-
+            <td className="px-6 py-4">{id ?? "-"}</td>
             <td className="px-6 py-4">{name ?? "-"}</td>
             <td className="px-6 py-4">{email ?? "-"}</td>
             {/* convert unixmilli to local date string */}

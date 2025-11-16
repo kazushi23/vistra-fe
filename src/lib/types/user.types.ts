@@ -4,3 +4,12 @@ export interface UserData {
     email: string;
     updatedAt: number;
 }
+
+export interface GetUsersResponse {
+  users: {
+    data: UserData[];
+    total: number;
+    page: number;
+    limit: number;
+  };
+}

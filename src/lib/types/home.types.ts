@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 
 // home header component props
 export interface HeadingProps {
-  onFileFolderCreated: () => void; // parse function to call on file or folder created
+  onFileFolderCreated?: () => void; // parse function to call on file or folder created
   search: string; // search input state
   setSearch: Dispatch<SetStateAction<string>>; // set search input state
 }

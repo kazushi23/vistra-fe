@@ -1,6 +1,6 @@
 'use client'
 
-import { UserData } from "@/lib/types/user.types"
+import { GetUsersResponse, UserData } from "@/lib/types/user.types"
 import { useState, useEffect } from "react"
 import { pageSizes } from "@/lib/static/pagesizesoptions";
 import { TableSort } from "@/lib/types/table.types";
@@ -8,6 +8,7 @@ import { useToast } from "@/components/base/toast";
 import { getUsers } from "@/lib/api/user";
 import List from "@/components/table/list";
 import { userHeader } from "@/lib/static/tablecolumns";
+import Heading from "@/components/home/heading";
 
 export default function User() {
     const [users, setUsers] = useState<UserData[]>([]);
@@ -17,16 +18,18 @@ export default function User() {
     const [page, setPage] = useState<number>(1) // note the current page
     const [search, setSearch] = useState<string>("") // note the search string for table
     const [sort, setSort] = useState<TableSort>({
-        desc: true, // sort order
-        column: "updatedAt", // sort column
+        desc: false, // sort order
+        column: "id", // sort column
     })
     const {showToast} = useToast(); // toast init
 
       // retrieve all documents
       async function fetchUsers() {
         try {
-          const res: UserData[] = await getUsers();
-          setUsers(res) // set data to state
+          const res: GetUsersResponse = await getUsers(page,pageSize, search, sort.column, sort.desc ? "desc" : "asc");
+          setUsers(res.users.data); // set data to state
+          setUserCount(res.users.total); // set data to state
+          setPage(res.users.page);
         } catch(error: any) {
           // display error message from server, else default message
           showToast("Error", error.message || "Something went wrong, please try again.")
@@ -55,6 +58,7 @@ export default function User() {
       return (
         <div className="min-h-screen p-8">
             <main>
+                <Heading search={search} setSearch={setSearch}/>
                 {!loading && <List userData={users} columns={userHeader} count={userCount} pageSize={pageSize} setPageSize={setPageSize} page={page} setPage={setPage} sort={sort} setSort={setSort}/>}
             </main>
         </div>

@@ -10,10 +10,14 @@ export default function Heading({onFileFolderCreated, search, setSearch}: Headin
     <section>
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <h1 className="text-2xl font-medium text-gray-600">Documents</h1>
-        <div className="flex flex-col sm:flex-row sm:space-x-3 gap-2 sm:gap-0">
-          <UploadFiles onFileCreated={onFileFolderCreated} />
-          <AddNewFolder onFolderCreated={onFileFolderCreated} />
-        </div>
+        {
+          onFileFolderCreated !== undefined &&
+          <div className="flex flex-col sm:flex-row sm:space-x-3 gap-2 sm:gap-0">
+            <UploadFiles onFileCreated={onFileFolderCreated} />
+            <AddNewFolder onFolderCreated={onFileFolderCreated} />
+          </div>
+        }
+
       </div>
       <div className="py-8">
         <SearchBox search={search} setSearch={setSearch} />
