@@ -1,16 +1,17 @@
 'use client';
 
-import { DocumentTableSortColumn } from "@/lib/types/table.types";
+import { DocumentTableSortColumn, TableColumn } from "@/lib/types/table.types";
 import PageSizeSelection from "../table/pagesizeselection";
 import PageSelection from "../table/pageselection";
 import { ListProps } from "@/lib/types/table.types";
 import { AscSelIcon, DescIcon, DescSelIcon } from "@/lib/static/icons";
-import ListRow from "./listrow";
+import ListRowDocument from "./listrowdocument";
 import EmptyTable from "../base/emptyTable";
-import ListHeader from "./listheader";
+import ListHeader from "./listheaderdocument";
+import ListRowUser from "./listrowuser";
 
 // table component holder with child search, th, pagination
-export default function List({documentData,count,pageSize,setPageSize,page,setPage,sort,setSort}: ListProps) {
+export default function List({documentData,userData,columns,count,pageSize,setPageSize,page,setPage,sort,setSort}: ListProps) {
   // check and display asc or desc sort icon
   function getSortIcon(column: DocumentTableSortColumn): string {
     if (column === sort.column) { // active column sort icon
@@ -37,14 +38,17 @@ export default function List({documentData,count,pageSize,setPageSize,page,setPa
       <div className="relative shadow-md sm:rounded-lg my-8 overflow-x-auto bg-white">
         <div className="h-[60vh] overflow-y-auto">
           <table className="w-full min-w-[700px] text-sm text-left rtl:text-right text-gray-500">
-            <thead className="text-xs text-white bg-[#011b56] sticky top-0 z-10">
+              <thead className="text-xs text-white bg-[#011b56] sticky top-0 z-10">
               {/* child component for th and sort icons */}
-              <ListHeader getSortIcon={getSortIcon} handleSort={handleSort}/>
-            </thead>
+              <ListHeader columns={columns} getSortIcon={getSortIcon} handleSort={handleSort}/>
+              </thead>
             <tbody>
               {/* child component to display all rows by parsing data */}
               {documentData && documentData.length > 0 ? documentData.map((doc) => (
-                <ListRow key={doc.id} id={doc.id} name={doc.name} createdBy={doc.createdBy} updatedAt={doc.updatedAt} size={doc.size} type={doc.type} />
+                <ListRowDocument key={doc.id} id={doc.id} name={doc.name} createdBy={doc.createdBy} updatedAt={doc.updatedAt} size={doc.size} type={doc.type} />
+              )): 
+              userData && userData.length > 0 ? userData.map((user) => (
+                <ListRowUser key={user.id} id={user.id} name={user.name} email={user.email} updatedAt={user.updatedAt} />
               )): 
                 // if no data, show
                 <EmptyTable colspan={6}/>

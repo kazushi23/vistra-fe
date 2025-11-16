@@ -1,15 +1,18 @@
 import { Dispatch, SetStateAction } from "react";
 import { DocumentItem } from "./document.types";
+import { UserData } from "./user.types";
 // table component props
 export interface ListProps {
-  documentData: DocumentItem[]; // document data for table
+  documentData?: DocumentItem[]; // document data for table
+  userData?: UserData[]; // document data for table
+  columns: TableColumn[];
   count: number; // total records
   pageSize: number; // page size selection
   setPageSize: Dispatch<SetStateAction<number>>; // set page size selection
   page: number; // page selection
   setPage: Dispatch<SetStateAction<number>>; // set page selection
-  sort: DocumentTableSort; // sort order and column
-  setSort: Dispatch<SetStateAction<DocumentTableSort>> // set sort order and column
+  sort: TableSort; // sort order and column
+  setSort: Dispatch<SetStateAction<TableSort>> // set sort order and column
 }
 
 // page selection component props
@@ -41,7 +44,7 @@ export interface SearchProps {
 export type DocumentTableSortColumn = "name" | "updatedAt"; // allowable sort column options
 
 // state type for sorting
-export interface DocumentTableSort {
+export interface TableSort {
   desc: boolean; // sort order
   column: DocumentTableSortColumn; // sort column
 }
@@ -50,8 +53,20 @@ export interface DocumentTableSort {
 export interface EmptyColumnsCountProps {
   colspan: number;
 }
+// types/table.types.ts
+
+export interface TableColumn {
+  key: string;            // data key, e.g., "name"
+  label: string;          // display label, e.g., "Name"
+  sortable?: boolean;     // enable sort icon & click handler
+  width?: string;         // optional width class
+  align?: "left" | "center" | "right";
+  isCheckbox?: boolean;   // first column checkbox
+}
+
 // table th props
 export interface ListHeaderProps {
+  columns: TableColumn[];
   getSortIcon: Function; // sort icon
   handleSort: Function; // handle sorting
 }

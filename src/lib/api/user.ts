@@ -1,4 +1,5 @@
 import {client} from "../graphql/client";
+import { UserData } from "../types/user.types";
 
 const GET_USERS = `
   query GetUsers {
@@ -6,16 +7,18 @@ const GET_USERS = `
       id
       name
       email
+      updatedAt
     }
   }
 `;
 
-export async function fetchUsers() {
+export async function getUsers(): Promise<UserData[]> {
   try {
-    const data = await client.request<{ users: { id: string; name: string; email: string }[] }>(GET_USERS);
+    const data = await client.request<{ users: UserData[] }>(GET_USERS);
     console.log(data.users);
     return data.users;
   } catch (err) {
-    console.error(err);
+    throw new Error("Failed to retrieve data");
   }
 }
+

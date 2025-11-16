@@ -6,10 +6,10 @@ import List from "../components/table/list";
 import {useEffect, useState} from "react"
 import { DocumentItem, GetDocumentResponse } from "@/lib/types/document.types";
 import { pageSizes } from "@/lib/static/pagesizesoptions";
-import { DocumentTableSort } from "@/lib/types/table.types";
+import { TableSort } from "@/lib/types/table.types";
 import { useToast } from "@/components/base/toast";
 import LoadingOverlay from "@/components/base/loadingOverlay";
-import { fetchUsers } from "@/lib/api/user";
+import { documentHeader } from "@/lib/static/tablecolumns";
 
 // Home page
 export default function Home() {
@@ -19,7 +19,7 @@ export default function Home() {
   const [pageSize, setPageSize] = useState<number>(pageSizes[0]) // for selection of rows per page
   const [page, setPage] = useState<number>(1) // note the current page
   const [search, setSearch] = useState<string>("") // note the search string for table
-  const [sort, setSort] = useState<DocumentTableSort>({
+  const [sort, setSort] = useState<TableSort>({
     desc: true, // sort order
     column: "updatedAt", // sort column
   })
@@ -28,8 +28,6 @@ export default function Home() {
   // retrieve all documents
   async function fetchDocuments() {
     try {
-      const users = await fetchUsers();
-      console.log(users)
       const res: GetDocumentResponse = await getDocuments(pageSize, page, search, sort.desc, sort.column)
       setDocuments(res.data) // set data to state
       setDocumentsCount(res.count) // set all records count to state
@@ -64,7 +62,7 @@ export default function Home() {
         {/* top page header */}
         <Heading onFileFolderCreated={fetchDocuments} search={search} setSearch={setSearch}/>
         {/* table with search and pagination */}
-        {!loading && <List documentData={documents} count={documentCount} pageSize={pageSize} setPageSize={setPageSize} page={page} setPage={setPage} sort={sort} setSort={setSort}/>}
+        {!loading && <List documentData={documents} count={documentCount} columns={documentHeader} pageSize={pageSize} setPageSize={setPageSize} page={page} setPage={setPage} sort={sort} setSort={setSort}/>}
         {loading && <LoadingOverlay />}
         </main>
     </div>

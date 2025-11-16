@@ -5,7 +5,7 @@ import { GetDatetimeString } from "@/utils/date";
 import { formatFileSize } from "@/utils/filesize";
 
 // child component to display rows from parsed data
-export default function ListRow({id, name, createdBy, updatedAt, size, type}: DocumentItem) {
+export default function ListRowDocument({id, name, createdBy, updatedAt, size, type}: DocumentItem) {
     return (
         <tr key={id}
             className="bg-white border-b border-gray-200 hover:bg-gray-50 cursor-pointer"
